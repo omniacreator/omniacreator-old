@@ -13,13 +13,13 @@ Windows Guide
 ### Install
 
 * Install [Git 1.9.4 for Windows](http://git-scm.com/download/win) (or better)
- * Please select **Use Git from the Windows Command Prompt** when prompted
- * Please select **Checkout as-is, commit Unix-style line endings** when prompted
+  * Please select **Use Git from the Windows Command Prompt** when prompted
+  * Please select **Checkout as-is, commit Unix-style line endings** when prompted
 * Install [GitHub for Windows 2.0](https://windows.github.com) (or better)
 * Install [Qt 5.3.0 for Windows 32-bit (MinGW 4.8.2, OpenGL)](http://qt-project.org/downloads) (or better)
- * Add *${installdir}/Tools/QtCreator/bin/jom.exe* to your path
+  * Add *${qt-installdir}/Tools/QtCreator/bin/jom.exe* to your path
 * Install [BitRock InstallBuilder 9 Multiplatform (Professional) for Windows](http://installbuilder.bitrock.com/download-installbuilder-for-qt-step-2.html) (or better)
- * Add *${installdir}/bin/builder-cli.exe* to your path
+  * Add *${bitrock-installdir}/bin/builder-cli.exe* to your path
 * Install [ActivePython 2.7.6 for Windows (x86)](http://www.activestate.com/activepython/downloads) (or better)
 * Install [ActivePerl 5.16.3 for Windows (x86)](http://www.activestate.com/activeperl/downloads) (or better)
 * **(Optional)** Install [ActiveTcl 8.6.1 for Windows (x86)](http://www.activestate.com/activetcl/downloads) (or better)
@@ -29,10 +29,46 @@ Windows Guide
 
 1. Clone [Omnia Creator](github-windows://openRepo/https://github.com/omniacreator/omniacreator) with GitHub for Windows
 2. Open *${clonedir}/ide/qt-creator-src/qtcreator.pro* with QtCreator
- 1. Set the debug output directory to *${clonedir}/ide/qt-creator-build*
- 2. Set the release output directory to *${clonedir}/ide/qt-creator-build*
-4. Using the Mode Selector (the left side bar) open *projects->build steps*
- 1. ...
+  1. Set the debug output directory to *${clonedir}/ide/qt-creator-build*
+  2. Set the release output directory to *${clonedir}/ide/qt-creator-build*
+4. Using the *Mode Selector* (the left side bar) open *Projects->Build & Run*
+5. Select **Desktop Qt x.x.x MinGW ... Build**
+  1. Set **Edit build configuration** to **Debug**
+    1. Under **Build Steps** edit the **Make** step by **overriding mingw32-make.exe** with **${qt-installdir}/Tools/QtCreator/bin/jom.exe**
+      * Leave **Make arguments** blank
+    2. Under **Build Steps** click **Add Build Step** and select **Custom Process Step**
+      1. Set **Command** to **python**
+      2. Set **Arguments** to **%{sourceDir}/../deploy.py ${qt-installdir}/Tools/QtCreator/bin/jom.exe debug**
+        * Don't expand/replace **%{sourceDir}**
+      3. Set **Working directory** to **%{buildDir}**
+        * Don't expand/replace **%{buildDir}**
+    3. Under **Clean Steps** edit the **Make** step by **overriding mingw32-make.exe** with **${qt-installdir}/Tools/QtCreator/bin/jom.exe**
+      * Leave **Make arguments** blank
+    4. Under **Clean Steps** click **Add Build Step** and select **Custom Process Step**
+      1. Set **Command** to **python**
+      2. Set **Arguments** to **%{sourceDir}/../deploy.py ${qt-installdir}/Tools/QtCreator/bin/jom.exe clean**
+        * Don't expand/replace **%{sourceDir}**
+      3. Set **Working directory** to **%{buildDir}**
+        * Don't expand/replace **%{buildDir}**
+  2. Set **Edit build configuration** to **Release**
+    1. Under **Build Steps** edit the **Make** step by **overriding mingw32-make.exe** with **${qt-installdir}/Tools/QtCreator/bin/jom.exe**
+      * Leave **Make arguments** blank
+    2. Under **Build Steps** click **Add Build Step** and select **Custom Process Step**
+      1. Set **Command** to **python**
+      2. Set **Arguments** to **%{sourceDir}/../deploy.py ${qt-installdir}/Tools/QtCreator/bin/jom.exe release**
+        * Don't expand/replace **%{sourceDir}**
+      3. Set **Working directory** to **%{buildDir}**
+        * Don't expand/replace **%{buildDir}**
+    3. Under **Clean Steps** edit the **Make** step by **overriding mingw32-make.exe** with **${qt-installdir}/Tools/QtCreator/bin/jom.exe**
+      * Leave **Make arguments** blank
+    4. Under **Clean Steps** click **Add Build Step** and select **Custom Process Step**
+      1. Set **Command** to **python**
+      2. Set **Arguments** to **%{sourceDir}/../deploy.py ${qt-installdir}/Tools/QtCreator/bin/jom.exe clean**
+        * Don't expand/replace **%{sourceDir}**
+      3. Set **Working directory** to **%{buildDir}**
+        * Don't expand/replace **%{buildDir}**
+6. Select **Desktop Qt x.x.x MinGW ... Run**
+
 
 Linux Guide
 -----------
