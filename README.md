@@ -17,9 +17,9 @@ Windows Guide
   * Please select **Checkout as-is, commit Unix-style line endings** when prompted
 * Install [GitHub for Windows 2.0](https://windows.github.com) *(or better)*
 * Install [Qt 5.3.0 for Windows 32-bit (MinGW 4.8.2, OpenGL)](http://qt-project.org/downloads) *(or better)*
-  * Add *${qt-installdir}/Tools/QtCreator/bin/jom.exe* to your path
+  * Add **${qt-installdir}/Tools/QtCreator/bin/jom.exe** to your path
 * Install [BitRock InstallBuilder 9 Multiplatform (Professional) for Windows](http://installbuilder.bitrock.com/download-installbuilder-for-qt-step-2.html) *(or better)*
-  * Add *${bitrock-installdir}/bin/builder-cli.exe* to your path
+  * Add **${bitrock-installdir}/bin/builder-cli.exe** to your path
 * Install [ActivePython 2.7.6 for Windows (x86)](http://www.activestate.com/activepython/downloads) *(or better)*
 * Install [ActivePerl 5.16.3 for Windows (x86)](http://www.activestate.com/activeperl/downloads) *(or better)*
 * **(Optional)** Install [ActiveTcl 8.6.1 for Windows (x86)](http://www.activestate.com/activetcl/downloads) *(or better)*
@@ -29,12 +29,12 @@ Windows Guide
 
 ### Configure
 
-1. Clone [Omnia Creator](github-windows://openRepo/https://github.com/omniacreator/omniacreator) with GitHub for Windows
-2. Open *${clonedir}/ide/qt-creator-src/qtcreator.pro* with QtCreator
-  1. Set the debug output directory to *${clonedir}/ide/qt-creator-build*
-  2. Set the release output directory to *${clonedir}/ide/qt-creator-build*
-4. Using the *Mode Selector* (the left side bar) open *Projects->Build & Run*
-5. Select **Desktop Qt x.x.x MinGW ... Build**
+1. Clone **[Omnia Creator](github-windows://openRepo/https://github.com/omniacreator/omniacreator)** with GitHub for Windows
+2. Open **${clonedir}/ide/qt-creator-src/qtcreator.pro** with QtCreator
+  1. Set the debug build directory to **${clonedir}/ide/qt-creator-build**
+  2. Set the release build directory to **${clonedir}/ide/qt-creator-build**
+3. Using the **Mode Selector** (the left side bar) click **Projects**
+4. Select **Desktop Qt x.x.x MinGW ... Build**
   1. Set **Edit build configuration** to **Debug**
     1. Under **Build Steps** edit the **Make** step by **overriding mingw32-make.exe** with  
     **${qt-installdir}/Tools/QtCreator/bin/jom.exe**
@@ -69,7 +69,7 @@ Windows Guide
       2. Set **Arguments** to **%{sourceDir}/../deploy.py**  
       **${qt-installdir}/Tools/QtCreator/bin/jom.exe clean**
       3. Set **Working directory** to **%{buildDir}**
-6. Select **Desktop Qt x.x.x MinGW ... Run**
+5. Select **Desktop Qt x.x.x MinGW ... Run**
   1. Under **Deployment** click **Add** and select **Deploy Configuration**
     1. Rename the new **Deployment configuration** to **Install**
     2. Click **Add Deploy Step** and select **Custom Process Step**
@@ -93,7 +93,7 @@ Windows Guide
       **${qt-installdir}/Tools/QtCreator/bin/jom.exe release -I -B**  
       **-S ${sign-password}**
       3. Set **Working directory** to **%{buildDir}**
-  3. ***(FOR TRUSTED DEVELOPERS ONLY)***  
+  4. ***(FOR TRUSTED DEVELOPERS ONLY)***  
   Under **Deployment** click **Add** and select **Deploy Configuration**
     1. Rename the new **Deployment configuration** to **Install-Build-Sign-Upload**
     2. Click **Add Deploy Step** and select **Custom Process Step**
@@ -102,6 +102,9 @@ Windows Guide
       **${qt-installdir}/Tools/QtCreator/bin/jom.exe release -I -B**  
       **-S ${sign-password} -U ${upload-password}**
       3. Set **Working directory** to **%{buildDir}**
+  5. Under **Deployment** set **Method** to **Deploy locally**
+  6. Under **Run** set **Run configuration** to **app**
+6. Using the **Mode Selector** (the left side bar) click **Run**
 
 *Please replace ${xxx} variables with the appropriate path*
 
