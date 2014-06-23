@@ -12,18 +12,20 @@ Windows Guide
 
 ### Install
 
-* Install [Git 1.9.4 for Windows](http://git-scm.com/download/win) (or better)
+* Install [Git 1.9.4 for Windows](http://git-scm.com/download/win) *(or better)*
   * Please select **Use Git from the Windows Command Prompt** when prompted
   * Please select **Checkout as-is, commit Unix-style line endings** when prompted
-* Install [GitHub for Windows 2.0](https://windows.github.com) (or better)
-* Install [Qt 5.3.0 for Windows 32-bit (MinGW 4.8.2, OpenGL)](http://qt-project.org/downloads) (or better)
+* Install [GitHub for Windows 2.0](https://windows.github.com) *(or better)*
+* Install [Qt 5.3.0 for Windows 32-bit (MinGW 4.8.2, OpenGL)](http://qt-project.org/downloads) *(or better)*
   * Add *${qt-installdir}/Tools/QtCreator/bin/jom.exe* to your path
-* Install [BitRock InstallBuilder 9 Multiplatform (Professional) for Windows](http://installbuilder.bitrock.com/download-installbuilder-for-qt-step-2.html) (or better)
+* Install [BitRock InstallBuilder 9 Multiplatform (Professional) for Windows](http://installbuilder.bitrock.com/download-installbuilder-for-qt-step-2.html) *(or better)*
   * Add *${bitrock-installdir}/bin/builder-cli.exe* to your path
-* Install [ActivePython 2.7.6 for Windows (x86)](http://www.activestate.com/activepython/downloads) (or better)
-* Install [ActivePerl 5.16.3 for Windows (x86)](http://www.activestate.com/activeperl/downloads) (or better)
-* **(Optional)** Install [ActiveTcl 8.6.1 for Windows (x86)](http://www.activestate.com/activetcl/downloads) (or better)
-* **(Optional)** Install [GIMP 2.8.10 for Windows](http://www.gimp.org/downloads/) (or better)
+* Install [ActivePython 2.7.6 for Windows (x86)](http://www.activestate.com/activepython/downloads) *(or better)*
+* Install [ActivePerl 5.16.3 for Windows (x86)](http://www.activestate.com/activeperl/downloads) *(or better)*
+* **(Optional)** Install [ActiveTcl 8.6.1 for Windows (x86)](http://www.activestate.com/activetcl/downloads) *(or better)*
+* **(Optional)** Install [GIMP 2.8.10 for Windows](http://www.gimp.org/downloads/) *(or better)*
+
+*Please replace ${xxx} variables with the appropriate path*
 
 ### Configure
 
@@ -41,9 +43,7 @@ Windows Guide
       1. Set **Command** to **python**
       2. Set **Arguments** to **%{sourceDir}/../deploy.py**  
       **${qt-installdir}/Tools/QtCreator/bin/jom.exe debug**
-        * Don't expand/replace **%{sourceDir}**
       3. Set **Working directory** to **%{buildDir}**
-        * Don't expand/replace **%{buildDir}**
     3. Under **Clean Steps** edit the **Make** step by **overriding mingw32-make.exe** with  
     **${qt-installdir}/Tools/QtCreator/bin/jom.exe**
       * Leave **Make arguments** blank
@@ -51,9 +51,7 @@ Windows Guide
       1. Set **Command** to **python**
       2. Set **Arguments** to **%{sourceDir}/../deploy.py**  
       **${qt-installdir}/Tools/QtCreator/bin/jom.exe clean**
-        * Don't expand/replace **%{sourceDir}**
       3. Set **Working directory** to **%{buildDir}**
-        * Don't expand/replace **%{buildDir}**
   2. Set **Edit build configuration** to **Release**
     1. Under **Build Steps** edit the **Make** step by **overriding mingw32-make.exe** with  
     **${qt-installdir}/Tools/QtCreator/bin/jom.exe**
@@ -62,9 +60,7 @@ Windows Guide
       1. Set **Command** to **python**
       2. Set **Arguments** to **%{sourceDir}/../deploy.py**  
       **${qt-installdir}/Tools/QtCreator/bin/jom.exe release**
-        * Don't expand/replace **%{sourceDir}**
       3. Set **Working directory** to **%{buildDir}**
-        * Don't expand/replace **%{buildDir}**
     3. Under **Clean Steps** edit the **Make** step by **overriding mingw32-make.exe** with  
     **${qt-installdir}/Tools/QtCreator/bin/jom.exe**
       * Leave **Make arguments** blank
@@ -72,50 +68,42 @@ Windows Guide
       1. Set **Command** to **python**
       2. Set **Arguments** to **%{sourceDir}/../deploy.py**  
       **${qt-installdir}/Tools/QtCreator/bin/jom.exe clean**
-        * Don't expand/replace **%{sourceDir}**
       3. Set **Working directory** to **%{buildDir}**
-        * Don't expand/replace **%{buildDir}**
 6. Select **Desktop Qt x.x.x MinGW ... Run**
   1. Under **Deployment** click **Add** and select **Deploy Configuration**
-    1. Rename the new *deployment configuration* to **Install**
+    1. Rename the new **Deployment configuration** to **Install**
     2. Click **Add Deploy Step** and select **Custom Process Step**
       1. Set **Command** to **python**
       2. Set **Arguments** to **%{sourceDir}/../deploy.py**  
       **${qt-installdir}/Tools/QtCreator/bin/jom.exe release -I**
-        * Don't expand/replace **%{sourceDir}**
       3. Set **Working directory** to **%{buildDir}**
-        * Don't expand/replace **%{buildDir}**
   2. Under **Deployment** click **Add** and select **Deploy Configuration**
-    1. Rename the new *deployment configuration* to **Install-Build**
+    1. Rename the new **Deployment configuration** to **Install-Build**
     2. Click **Add Deploy Step** and select **Custom Process Step**
       1. Set **Command** to **python**
       2. Set **Arguments** to **%{sourceDir}/../deploy.py**  
       **${qt-installdir}/Tools/QtCreator/bin/jom.exe release -I -B**
-        * Don't expand/replace **%{sourceDir}**
       3. Set **Working directory** to **%{buildDir}**
-        * Don't expand/replace **%{buildDir}**
   3. ***(FOR TRUSTED DEVELOPERS ONLY)***  
   Under **Deployment** click **Add** and select **Deploy Configuration**
-    1. Rename the new *deployment configuration* to **Install-Build-Sign**
+    1. Rename the new **Deployment configuration** to **Install-Build-Sign**
     2. Click **Add Deploy Step** and select **Custom Process Step**
       1. Set **Command** to **python**
       2. Set **Arguments** to **%{sourceDir}/../deploy.py**  
       **${qt-installdir}/Tools/QtCreator/bin/jom.exe release -I -B**  
       **-S ${sign-password}**
-        * Don't expand/replace **%{sourceDir}**
       3. Set **Working directory** to **%{buildDir}**
-        * Don't expand/replace **%{buildDir}**
   3. ***(FOR TRUSTED DEVELOPERS ONLY)***  
   Under **Deployment** click **Add** and select **Deploy Configuration**
-    1. Rename the new *deployment configuration* to **Install-Build-Sign-Upload**
+    1. Rename the new **Deployment configuration** to **Install-Build-Sign-Upload**
     2. Click **Add Deploy Step** and select **Custom Process Step**
       1. Set **Command** to **python**
       2. Set **Arguments** to **%{sourceDir}/../deploy.py**  
       **${qt-installdir}/Tools/QtCreator/bin/jom.exe release -I -B**  
       **-S ${sign-password} -U ${upload-password}**
-        * Don't expand/replace **%{sourceDir}**
       3. Set **Working directory** to **%{buildDir}**
-        * Don't expand/replace **%{buildDir}*
+
+*Please replace ${xxx} variables with the appropriate path*
 
 Linux Guide
 -----------
