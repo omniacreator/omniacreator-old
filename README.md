@@ -23,7 +23,7 @@ Windows Guide
 * Install [ActivePerl 5.16.3 for Windows (x86)](http://www.activestate.com/activeperl/downloads) *(or better)*
 * Install [ActiveTcl 8.6.1 for Windows (x86)](http://www.activestate.com/activetcl/downloads) *(or better)*
 * Install [Doxygen 1.8.7 for Windows](http://www.stack.nl/~dimitri/doxygen/download.html) *(or better)*
-* Install [Graphviz 2.38.00 for Windows](http://www.graphviz.org/Download_windows.php) *(or better)*
+* Install [Graphviz 2.38.0 for Windows](http://www.graphviz.org/Download_windows.php) *(or better)*
   * Add **${graphviz-installdir}\bin** to your path
 * Install [CMake 3.0.0 for Windows](http://www.cmake.org/cmake/resources/software.html) *(or better)*
 
