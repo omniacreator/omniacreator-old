@@ -1,3 +1,4 @@
 [submodule "ide/qt-creator-src"]
 	path = ide/qt-creator-src
 	url = https://github.com/omniacreator/qtcreator.git
+    branch = omniacreator
