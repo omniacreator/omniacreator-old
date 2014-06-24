@@ -32,76 +32,76 @@ Windows Guide
 ### Configure
 
 1. Clone **[Omnia Creator](github-windows://openRepo/https://github.com/omniacreator/omniacreator)** with GitHub for Windows
-2. Open **${clonedir}\ide\qt-creator-src\qtcreator.pro** with QtCreator
-  1. Set the debug build directory to **${clonedir}\ide\qt-creator-build**
-  2. Set the release build directory to **${clonedir}\ide\qt-creator-build**
+2. Open **${clonedir}\\ide\qt-creator-src\qtcreator.pro** with QtCreator
+  1. Set the debug build directory to **${clonedir}\\ide\qt-creator-build**
+  2. Set the release build directory to **${clonedir}\\ide\qt-creator-build**
 3. Using the **Mode Selector** (the left side bar) click **Projects**
 4. Select **Desktop Qt x.x.x MinGW ... Build**
   1. Set **Edit build configuration** to **Debug**
-    1. Under **Build Steps** edit the **Make** step by **overriding mingw32-make.exe** with  
-    **${qt-installdir}\Tools\QtCreator\bin\jom.exe**
+    1. Under **Build Steps** edit the **Make** step by **overriding mingw32-make.exe** with
+    **${qt-installdir}\\Tools\QtCreator\bin\jom.exe**
       * Leave **Make arguments** blank
     2. Under **Build Steps** click **Add Build Step** and select **Custom Process Step**
       1. Set **Command** to **python**
-      2. Set **Arguments** to **%{sourceDir}\..\deploy.py**  
-      **${qt-installdir}\Tools\QtCreator\bin\jom.exe debug**
+      2. Set **Arguments** to **%{sourceDir}\\..\deploy.py**
+      **${qt-installdir}\\Tools\QtCreator\bin\jom.exe debug**
       3. Set **Working directory** to **%{buildDir}**
-    3. Under **Clean Steps** edit the **Make** step by **overriding mingw32-make.exe** with  
-    **${qt-installdir}\Tools\QtCreator\bin\jom.exe**
+    3. Under **Clean Steps** edit the **Make** step by **overriding mingw32-make.exe** with
+    **${qt-installdir}\\Tools\QtCreator\bin\jom.exe**
       * Leave **Make arguments** blank
     4. Under **Clean Steps** click **Add Build Step** and select **Custom Process Step**
       1. Set **Command** to **python**
-      2. Set **Arguments** to **%{sourceDir}\..\deploy.py**  
-      **${qt-installdir}\Tools\QtCreator\bin\jom.exe clean**
+      2. Set **Arguments** to **%{sourceDir}\\..\deploy.py**
+      **${qt-installdir}\\Tools\QtCreator\bin\jom.exe clean**
       3. Set **Working directory** to **%{buildDir}**
   2. Set **Edit build configuration** to **Release**
-    1. Under **Build Steps** edit the **Make** step by **overriding mingw32-make.exe** with  
-    **${qt-installdir}\Tools\QtCreator\bin\jom.exe**
+    1. Under **Build Steps** edit the **Make** step by **overriding mingw32-make.exe** with
+    **${qt-installdir}\\Tools\QtCreator\bin\jom.exe**
       * Leave **Make arguments** blank
     2. Under **Build Steps** click **Add Build Step** and select **Custom Process Step**
       1. Set **Command** to **python**
-      2. Set **Arguments** to **%{sourceDir}\..\deploy.py**  
-      **${qt-installdir}\Tools\QtCreator\bin\jom.exe release**
+      2. Set **Arguments** to **%{sourceDir}\\..\deploy.py**
+      **${qt-installdir}\\Tools\QtCreator\bin\jom.exe release**
       3. Set **Working directory** to **%{buildDir}**
-    3. Under **Clean Steps** edit the **Make** step by **overriding mingw32-make.exe** with  
-    **${qt-installdir}\Tools\QtCreator\bin\jom.exe**
+    3. Under **Clean Steps** edit the **Make** step by **overriding mingw32-make.exe** with
+    **${qt-installdir}\\Tools\QtCreator\bin\jom.exe**
       * Leave **Make arguments** blank
     4. Under **Clean Steps** click **Add Build Step** and select **Custom Process Step**
       1. Set **Command** to **python**
-      2. Set **Arguments** to **%{sourceDir}\..\deploy.py**  
-      **${qt-installdir}\Tools\QtCreator\bin\jom.exe clean**
+      2. Set **Arguments** to **%{sourceDir}\\..\deploy.py**
+      **${qt-installdir}\\Tools\QtCreator\bin\jom.exe clean**
       3. Set **Working directory** to **%{buildDir}**
 5. Select **Desktop Qt x.x.x MinGW ... Run**
   1. Under **Deployment** click **Add** and select **Deploy Configuration**
     1. Rename the new **Deployment configuration** to **Install**
     2. Click **Add Deploy Step** and select **Custom Process Step**
       1. Set **Command** to **python**
-      2. Set **Arguments** to **%{sourceDir}\..\deploy.py**  
-      **${qt-installdir}\Tools\QtCreator\bin\jom.exe release -I**
+      2. Set **Arguments** to **%{sourceDir}\\..\deploy.py**
+      **${qt-installdir}\\Tools\QtCreator\bin\jom.exe release -I**
       3. Set **Working directory** to **%{buildDir}**
   2. Under **Deployment** click **Add** and select **Deploy Configuration**
     1. Rename the new **Deployment configuration** to **Install-Build**
     2. Click **Add Deploy Step** and select **Custom Process Step**
       1. Set **Command** to **python**
-      2. Set **Arguments** to **%{sourceDir}\..\deploy.py**  
-      **${qt-installdir}\Tools\QtCreator\bin\jom.exe release -I -B**
+      2. Set **Arguments** to **%{sourceDir}\\..\deploy.py**
+      **${qt-installdir}\\Tools\QtCreator\bin\jom.exe release -I -B**
       3. Set **Working directory** to **%{buildDir}**
-  3. ***(FOR TRUSTED DEVELOPERS ONLY)***  
+  3. ***(FOR TRUSTED DEVELOPERS ONLY)***
   Under **Deployment** click **Add** and select **Deploy Configuration**
     1. Rename the new **Deployment configuration** to **Install-Build-Sign**
     2. Click **Add Deploy Step** and select **Custom Process Step**
       1. Set **Command** to **python**
-      2. Set **Arguments** to **%{sourceDir}\..\deploy.py**  
-      **${qt-installdir}\Tools\QtCreator\bin\jom.exe release -I -B**  
+      2. Set **Arguments** to **%{sourceDir}\\..\deploy.py**  
+      **${qt-installdir}\\Tools\QtCreator\bin\jom.exe release -I -B**  
       **-S ${sign-password}**
       3. Set **Working directory** to **%{buildDir}**
-  4. ***(FOR TRUSTED DEVELOPERS ONLY)***  
+  4. ***(FOR TRUSTED DEVELOPERS ONLY)***
   Under **Deployment** click **Add** and select **Deploy Configuration**
     1. Rename the new **Deployment configuration** to **Install-Build-Sign-Upload**
     2. Click **Add Deploy Step** and select **Custom Process Step**
       1. Set **Command** to **python**
-      2. Set **Arguments** to **%{sourceDir}\..\deploy.py**  
-      **${qt-installdir}\Tools\QtCreator\bin\jom.exe release -I -B**  
+      2. Set **Arguments** to **%{sourceDir}\\..\deploy.py**
+      **${qt-installdir}\\Tools\QtCreator\bin\jom.exe release -I -B**  
       **-S ${sign-password} -U ${upload-password}**
       3. Set **Working directory** to **%{buildDir}**
   5. Under **Deployment** set **Method** to **Deploy locally**
