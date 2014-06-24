@@ -17,6 +17,7 @@ Windows Guide
   * Please select **Checkout as-is, commit Unix-style line endings** when prompted
 * Install [GitHub for Windows 2.0.6](https://windows.github.com) *(or better)*
 * Install [Qt 5.3.0 for Windows 32-bit (MinGW 4.8.2, OpenGL)](http://qt-project.org/downloads) *(or better)*
+* Install [CMake 3.0.0 for Windows](http://www.cmake.org/cmake/resources/software.html) *(or better)*
 * Install [BitRock InstallBuilder 9.0.1 Multiplatform (Professional) for Windows](http://installbuilder.bitrock.com/download-installbuilder-for-qt-step-2.html) *(or better)*
   * Add **${installbuilder-installdir}\bin** to your path
 * Install [ActivePython 2.7.6 for Windows (x86)](http://www.activestate.com/activepython/downloads) *(or better)*
@@ -25,7 +26,6 @@ Windows Guide
 * Install [Doxygen 1.8.7 for Windows](http://www.stack.nl/~dimitri/doxygen/download.html) *(or better)*
 * Install [Graphviz 2.38.0 for Windows](http://www.graphviz.org/Download_windows.php) *(or better)*
   * Add **${graphviz-installdir}\bin** to your path
-* Install [CMake 3.0.0 for Windows](http://www.cmake.org/cmake/resources/software.html) *(or better)*
 
 *Please replace ${xxx} variables with the appropriate path*
 
