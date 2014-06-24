@@ -1,4 +1,16 @@
+/ide/qt-creator-build/
+/installer/install/
+/installer/installer/
+/tools/
+
+/installer/private-license.xml
+/installer/private-signature.pfx
+
+*.backup
+
 Thumbs.db
+
+################################################################################
 
 # C++ objects and libs
 
