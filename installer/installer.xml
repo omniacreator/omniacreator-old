@@ -2,8 +2,8 @@
     <shortName>omniacreator</shortName>
     <fullName>Omnia Creator</fullName>
     <version>0.1</version>
-    <readmeFile>README</readmeFile>
-    <licenseFile>LICENSE</licenseFile>
+    <readmeFile>README.md</readmeFile>
+    <licenseFile>LICENSE.mit</licenseFile>
     <leftImage>../icons/internal/icon/installer-icon163x314.png</leftImage>
     <logoImage>../icons/internal/icon/installer-icon48x48.png</logoImage>
     <splashImage>../icons/internal/about/about300x600.png</splashImage>
