@@ -1,5 +1,6 @@
 Release History
+===============
 
-# Version 0.1 - 2014
+### Version 0.1 - 2014
 
 Initial release
