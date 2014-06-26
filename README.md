@@ -33,8 +33,8 @@ Windows Guide
 
 1. Clone **[Omnia Creator](github-windows://openRepo/https://github.com/omniacreator/omniacreator)** with GitHub for Windows
 2. Open **${clonedir}\\ide\qt-creator-src\qtcreator.pro** with QtCreator
-  1. Set the debug build directory to **${clonedir}\\ide\qt-creator-build**
-  2. Set the release build directory to **${clonedir}\\ide\qt-creator-build**
+  1. Set the debug build directory to **${clonedir}\\ide\qt-creator-build** (click **details** to show)
+  2. Set the release build directory to **${clonedir}\\ide\qt-creator-build** (click **details** to show)
 3. Using the **Mode Selector** (the left side bar) click **Projects**
 4. Select **Desktop Qt x.x.x MinGW ... Build**
   1. Set **Edit build configuration** to **Debug**
