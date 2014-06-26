@@ -28,8 +28,8 @@ INSTALLER_LICENSE = "../installer/private-license.xml"
 SIGNCMD_PATH = "../tools/ksign/kSignCMD.exe"
 CERTIFICATE_PATH = "../installer/private-signature.pfx"
 
-FTP_SITE = "ftp.omniacreator.org"
-FTP_USER = "deploypy"
+FTP_SITE = "ftp.omniacreator.com"
+FTP_USER = "deploy.py"
 FTP_SIZE = 65536
 
 class UploadInfo:
@@ -48,7 +48,7 @@ class UploadInfo:
     def callback(self, unused):
 
         self.bytes_written += FTP_SIZE
-        progress = round((self.bytes_written / float(self.file_size)) * 100)
+        progress = ((self.bytes_written * 100) / self.file_size)
 
         if self.upload_progress != progress:
             self.upload_progress = progress
