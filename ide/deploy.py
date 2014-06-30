@@ -141,12 +141,12 @@ if __name__ == "__main__":
 
         subprocess.call(["python", os.path.join(__folder__,
         "qt-creator-src/share/qtcreator/"
-        "cmake-board-modules/deploy_cmake_board_modules.py"),
+        "cmake-board-modules/deploy-cmake-board-modules.py"),
         build_folder])
 
         subprocess.call(["python", os.path.join(__folder__,
         "qt-creator-src/share/qtcreator/"
-        "cmake-board-types/deploy_cmake_board_types.py"),
+        "cmake-board-types/deploy-cmake-board-types.py"),
         build_folder])
 
         print "Deploying FFTW to build dir..."
@@ -154,17 +154,17 @@ if __name__ == "__main__":
 
         subprocess.call(["python", os.path.join(__folder__,
         "qt-creator-src/src/plugins/"
-        "omniacreator/deploy_fftw.py"),
+        "omniacreator/deploy-fftw3.py"),
         build_folder])
 
         if args.install_files:
 
-            print "Deploying Omnia Creator Library to build dir..."
+            print "Deploying The Interface Library to build dir..."
             sys.stdout.flush()
 
             subprocess.call(["python", os.path.join(__folder__,
             "qt-creator-src/src/plugins/"
-            "omniacreator/deploy_omniacreatorlibrary.py"),
+            "omniacreator/deploy-interfacelibrary.py"),
             build_folder])
 
     if args.make_mode == "release":
@@ -176,12 +176,12 @@ if __name__ == "__main__":
 
             subprocess.call(["python", os.path.join(__folder__,
             "qt-creator-src/share/qtcreator/"
-            "cmake-board-modules/deploy_cmake_board_modules.py"),
+            "cmake-board-modules/deploy-cmake-board-modules.py"),
             install_folder])
 
             subprocess.call(["python", os.path.join(__folder__,
             "qt-creator-src/share/qtcreator/"
-            "cmake-board-types/deploy_cmake_board_types.py"),
+            "cmake-board-types/deploy-cmake-board-types.py"),
             install_folder])
 
             print "Deploying FFTW to install dir..."
@@ -189,15 +189,15 @@ if __name__ == "__main__":
 
             subprocess.call(["python", os.path.join(__folder__,
             "qt-creator-src/src/plugins/"
-            "omniacreator/deploy_fftw.py"),
+            "omniacreator/deploy-fftw3.py"),
             install_folder])
 
-            print "Deploying Omnia Creator Library to install dir..."
+            print "Deploying The Interface Library to install dir..."
             sys.stdout.flush()
 
             subprocess.call(["python", os.path.join(__folder__,
             "qt-creator-src/src/plugins/"
-            "omniacreator/deploy_omniacreatorlibrary.py"),
+            "omniacreator/deploy-interfacelibrary.py"),
             install_folder])
 
             if sys.platform != "darwin":
@@ -331,7 +331,7 @@ if __name__ == "__main__":
 
                         result = subprocess.call([signcmd,
                         "/d", "Omnia Creator",
-                        "/du", "www.omniacreator.org",
+                        "/du", "www.omniacreator.com",
                         "/f", certificate,
                         "/p", args.sign,
                         binary])
@@ -372,7 +372,7 @@ if __name__ == "__main__":
 
                             result = subprocess.call([signcmd,
                             "/d", "Omnia Creator",
-                            "/du", "www.omniacreator.org",
+                            "/du", "www.omniacreator.com",
                             "/f", certificate,
                             "/p", args.sign,
                             binary])
@@ -464,7 +464,7 @@ if __name__ == "__main__":
             else:
                 shutil.rmtree(file_object_path, True)
 
-    else:
+    elif args.make_mode != "debug":
 
         sys.exit("Make Mode \"%s\" does not exist!" % args.make_mode)
 
