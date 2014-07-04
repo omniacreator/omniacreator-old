@@ -2,3 +2,4 @@
 	path = ide/qt-creator-src
 	url = https://github.com/omniacreator/qtcreator.git
 	branch = omniacreator
+	fetchRecurseSubmodules = true

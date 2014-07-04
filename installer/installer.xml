@@ -6,7 +6,7 @@
     <licenseFile>LICENSE.mit</licenseFile>
     <leftImage>../icons/internal/icon/installer-icon163x314.png</leftImage>
     <logoImage>../icons/internal/icon/installer-icon48x48.png</logoImage>
-    <splashImage>../icons/internal/about/about300x600.png</splashImage>
+    <splashImage>../icons/internal/about/about600x300.png</splashImage>
     <wmImage>../icons/internal/icon/icon48x48.png</wmImage>
     <defaultLanguage>auto</defaultLanguage>
     <allowLanguageSelection>1</allowLanguageSelection>
@@ -895,7 +895,7 @@
     <splashScreenDelay>5</splashScreenDelay>
     <summary>${product_fullname} is a cross platform C/C++ IDE for Makers</summary>
     <vendor>${product_fullname}</vendor>
-    <windowsExecutableIcon>../icons/internal/installer/installer.ico</windowsExecutableIcon>
+    <windowsExecutableIcon>../icons/internal/installer/installer/installer.ico</windowsExecutableIcon>
     <windowsResourceComments>${product_fullname} is a cross platform C/C++ IDE for Makers</windowsResourceComments>
     <windowsResourceFileDescription>${product_fullname} is a cross platform C/C++ IDE for Makers</windowsResourceFileDescription>
     <windowsResourceFileVersion>${product_version}</windowsResourceFileVersion>
@@ -903,7 +903,7 @@
     <windowsResourceLegalCopyright>Copyright  (c) 2014 ${project.vendor}</windowsResourceLegalCopyright>
     <windowsResourceLegalTrademarks>Copyright (c) 2014 ${project.vendor}</windowsResourceLegalTrademarks>
     <windowsResourceOriginalFilename>${product_shortname}-${product_version}-${platform_name}-installer.exe</windowsResourceOriginalFilename>
-    <windowsUninstallerExecutableIcon>../icons/internal/uninstaller/uninstaller.ico</windowsUninstallerExecutableIcon>
+    <windowsUninstallerExecutableIcon>../icons/internal/installer/uninstaller/uninstaller.ico</windowsUninstallerExecutableIcon>
     <finalPageActionList>
         <runProgram>
             <abortOnError>0</abortOnError>

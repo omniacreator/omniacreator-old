@@ -5,56 +5,33 @@
 # Deploy Script
 #
 # @version @n 1.0
-# @date @n 6/24/2014
+# @date @n 7/4/2014
 #
 # @author @n Kwabena W. Agyeman
 # @copyright @n (c) 2014 Kwabena W. Agyeman
 # @n All rights reserved - Please see the end of the file for the terms of use
 #
 # @par Update History:
-# @n v1.0 - Original release - 6/24/2014
+# @n v1.0 - Original release - 7/4/2014
 ################################################################################
 
-import argparse, os, sys, shutil, subprocess, glob, fnmatch, ftplib, urllib
+import argparse, os, sys, re, shutil, subprocess, glob, fnmatch
 
 INSTALL_PREFIX = "../installer"
 INSTALL_FOLDER = "install"
 INSTALLER_FOLDER = "installer"
 BUILD_FOLDER = ""
 
-INSTALLER_CONFIGURATION = "../installer/installer.xml"
+PRO_FILE = "../ide/qt-creator-src/src/plugins/omniacreator/omniacreator.pro"
+
+LIBRARY_DIRECTORY = "share/qtcreator/libraries"
+
+INSTALLER_PROJECT = "../installer/installer.xml"
 INSTALLER_LICENSE = "../installer/private-license.xml"
 
-SIGNCMD_PATH = "../tools/ksign/kSignCMD.exe"
-CERTIFICATE_PATH = "../installer/private-signature.pfx"
+DIGITAL_CERTIFICATE = "../installer/private-signature.pfx"
 
-FTP_SITE = "ftp.omniacreator.com"
-FTP_USER = "deploy.py"
-FTP_SIZE = 65536
-
-class UploadInfo:
-
-    file_name = ""
-    file_size = 0
-
-    bytes_written = 0
-    upload_progress = -1
-
-    def __init__(self, name):
-
-        self.file_name = name
-        self.file_size = os.path.getsize(name)
-
-    def callback(self, unused):
-
-        self.bytes_written += FTP_SIZE
-        progress = ((self.bytes_written * 100) / self.file_size)
-
-        if self.upload_progress != progress:
-            self.upload_progress = progress
-
-            print "Uploading \"%s\" [%03d%%]..." % (self.file_name, progress)
-            sys.stdout.flush()
+SFTP_USERNAME = "omni2127468419"
 
 if __name__ == "__main__":
 
@@ -88,53 +65,133 @@ if __name__ == "__main__":
     build_folder = os.path.abspath(os.path.join(args.build_folder,
     BUILD_FOLDER))
 
-    installer_configuration = os.path.abspath(os.path.join(__folder__,
-    INSTALLER_CONFIGURATION))
+    pro_file = os.path.abspath(os.path.join(__folder__,
+    PRO_FILE))
+
+    library_directory = os.path.abspath(os.path.join(installer_folder,
+    LIBRARY_DIRECTORY))
+
+    installer_project = os.path.abspath(os.path.join(__folder__,
+    INSTALLER_PROJECT))
 
     installer_license = os.path.abspath(os.path.join(__folder__,
     INSTALLER_LICENSE))
 
-    signcmd = os.path.abspath(os.path.join(__folder__,
-    SIGNCMD_PATH))
-
-    certificate = os.path.abspath(os.path.join(__folder__,
-    CERTIFICATE_PATH))
+    digital_certificate = os.path.abspath(os.path.join(__folder__,
+    DIGITAL_CERTIFICATE))
 
     if not os.path.exists(args.make_path):
-        sys.exit("JOM Binary \"%s\" does not exist!" % args.make_path)
+        sys.exit("JOM Binary \"%s\" "
+                 "does not exist!" % args.make_path)
+
+    if args.make_mode not in ["debug", "release", "clean"]:
+        sys.exit("Make Mode \"%s\" "
+                 "does not exist!" % args.make_mode)
 
     if not os.path.exists(build_folder):
-        sys.exit("Build Folder \"%s\" does not exist!" % build_folder)
+        sys.exit("Build Folder \"%s\" "
+                 "does not exist!" % build_folder)
 
-    if args.make_mode == "release" and args.install_files:
-
-        if not os.path.exists(install_folder):
-            os.makedirs(install_folder)
-
-        if not os.path.exists(installer_folder):
-            os.makedirs(installer_folder)
+    if not os.path.exists(pro_file):
+        sys.exit("PRO File \"%s\" "
+                 "does not exist!" % pro_file)
 
     if args.build_installer:
 
-        if not os.path.exists(installer_configuration):
-            sys.exit("Installer Configuration File \"%s\" "
-                     "does not exist!" % installer_configuration)
+        if not os.path.exists(installer_project):
+            sys.exit("Installer Project \"%s\" "
+                     "does not exist!" % installer_project)
 
         if not os.path.exists(installer_license):
-            sys.exit("Installer License File \"%s\" "
+            sys.exit("Installer License \"%s\" "
                      "does not exist!" % installer_license)
 
     if args.sign:
 
-        if sys.platform.startswith("win") and not os.path.exists(signcmd):
-            sys.exit("Sign CMD \"%s\" does not exist!" % signcmd)
+        if not os.path.exists(digital_certificate):
+            sys.exit("Digital Certificate \"%s\" "
+                     "does not exist!" % digital_certificate)
 
-        if sys.platform.startswith("win") and not os.path.exists(certificate):
-            sys.exit("PFX File \"%s\" does not exist!" % certificate)
+    # Import Pro Settings Begin ###############################################
+
+    dict = {}
+    regex = re.compile(r"(.+?)\s+=\s+\"(.+?)\"")
+
+    with open(pro_file) as file:
+        for line in file:
+            match = regex.search(line)
+
+            if match:
+                dict[match.group(1)] = match.group(2)
+
+    pro_full_name = dict["PROJECT_FULL_NAME"]
+    pro_full_name_wo_spaces = re.sub(r"[ _]", "", pro_full_name)
+    pro_short_name = pro_full_name_wo_spaces.lower()
+    pro_version = dict["PROJECT_VERSION"]
+    pro_vendor = pro_full_name
+    pro_copyright = dict["PROJECT_COPYRIGHT"]
+    pro_category = dict["PROJECT_CATEGORY"]
+    pro_description = dict["PROJECT_DESCRIPTION"]
+    pro_url = "www." + pro_short_name + ".com"
+    pro_email = pro_short_name + "@" + pro_short_name + ".com"
+    pro_domain = pro_short_name + ".com"
+
+    # Import Pro Settings End #################################################
+
+    if args.make_mode != "clean":
+
+        if args.install_files:
+
+            shutil.rmtree(install_folder, True)
+            os.makedirs(install_folder)
+
+        if args.build_installer:
+
+            shutil.rmtree(installer_folder, True)
+            os.makedirs(installer_folder)
 
     # Deploy ##################################################################
 
-    if args.make_mode == "debug" or args.make_mode == "release":
+    if args.make_mode == "clean":
+
+        if os.path.exists(install_folder):
+
+            print "Cleaning Install Folder contents..."
+            sys.stdout.flush()
+
+            for file_object in os.listdir(install_folder):
+                file_object_path = os.path.join(install_folder, file_object)
+
+                if os.path.isfile(file_object_path):
+                    os.remove(file_object_path)
+                else:
+                    shutil.rmtree(file_object_path, True)
+
+        if os.path.exists(installer_folder):
+
+            print "Cleaning Installer Folder contents..."
+            sys.stdout.flush()
+
+            for file_object in os.listdir(installer_folder):
+                file_object_path = os.path.join(installer_folder, file_object)
+
+                if os.path.isfile(file_object_path):
+                    os.remove(file_object_path)
+                else:
+                    shutil.rmtree(file_object_path, True)
+
+        print "Cleaning Build Folder contents..."
+        sys.stdout.flush()
+
+        for file_object in os.listdir(build_folder):
+            file_object_path = os.path.join(build_folder, file_object)
+
+            if os.path.isfile(file_object_path):
+                os.remove(file_object_path)
+            else:
+                shutil.rmtree(file_object_path, True)
+
+    else:
 
         print "Deploying CMake Files to build dir..."
         sys.stdout.flush()
@@ -166,10 +223,6 @@ if __name__ == "__main__":
             "qt-creator-src/src/plugins/"
             "omniacreator/deploy-interfacelibrary.py"),
             build_folder])
-
-    if args.make_mode == "release":
-
-        if args.install_files:
 
             print "Deploying CMake Files to install dir..."
             sys.stdout.flush()
@@ -282,8 +335,10 @@ if __name__ == "__main__":
             except OSError:
                 pass
 
-            unused = glob.glob(os.path.join(install_folder,
-            "share/qtcreator/translations/assistant_*.qm"))
+            unused = []
+
+            unused.extend(glob.glob(os.path.join(install_folder,
+            "share/qtcreator/translations/assistant_*.qm")))
 
             unused.extend(glob.glob(os.path.join(install_folder,
             "share/qtcreator/translations/designer_*.qm")))
@@ -305,7 +360,7 @@ if __name__ == "__main__":
 
             # Cleanup End #####################################################
 
-            if sys.platform.startswith("win") and args.sign:
+            if args.sign:
 
                 print "Signing Executables..."
                 sys.stdout.flush()
@@ -320,33 +375,41 @@ if __name__ == "__main__":
                     for filename in fnmatch.filter(filenames, "*.exe"):
                         binaries.append(os.path.join(dirpath, filename))
 
+                    for filename in fnmatch.filter(filenames, "*.dylib"):
+                        binaries.append(os.path.join(dirpath, filename))
+
+                    for filename in fnmatch.filter(filenames, "*.app"):
+                        binaries.append(os.path.join(dirpath, filename))
+
+                    for filename in fnmatch.filter(filenames, "*.so"):
+                        binaries.append(os.path.join(dirpath, filename))
+
+                    for filename in fnmatch.filter(filenames, "*.run"):
+                        binaries.append(os.path.join(dirpath, filename))
+
                 for binary in binaries:
 
-                    result = 1
-
-                    while result != 0:
-
-                        print "Signing %s..." % os.path.basename(binary)
-                        sys.stdout.flush()
-
-                        result = subprocess.call([signcmd,
-                        "/d", "Omnia Creator",
-                        "/du", "www.omniacreator.com",
-                        "/f", certificate,
-                        "/p", args.sign,
-                        binary])
+                    subprocess.call(["python",
+                    os.path.join(__folder__, "deploy-sign.py"),
+                    "-D", pro_description, "-U", pro_url,
+                    digital_certificate, args.sign, binary])
 
             if args.build_installer:
 
                 print "Building Installer..."
                 sys.stdout.flush()
 
-                subprocess.call(["builder-cli",
-                "build", installer_configuration,
-                "--license", installer_license,
-                "--verbose", "--downloadable-components"])
+                subprocess.call(" ".join(["builder-cli",
+                "build", '\"' + installer_project + '\"',
+                "--verbose",
+                "--license", '\"' + installer_license + '\"',
+                "--setvars",
+                "project.shortName=" + '\"' + pro_short_name + '\"',
+                "project.fullName=" + '\"' + pro_full_name + '\"',
+                "project.version=" '\"' + pro_version + '\"',
+                "--downloadable-components"]))
 
-                if sys.platform.startswith("win") and args.sign:
+                if args.sign:
 
                     print "Signing Executables..."
                     sys.stdout.flush()
@@ -361,32 +424,28 @@ if __name__ == "__main__":
                         for filename in fnmatch.filter(filenames, "*.exe"):
                             binaries.append(os.path.join(dirpath, filename))
 
+                        for filename in fnmatch.filter(filenames, "*.dylib"):
+                            binaries.append(os.path.join(dirpath, filename))
+
+                        for filename in fnmatch.filter(filenames, "*.app"):
+                            binaries.append(os.path.join(dirpath, filename))
+
+                        for filename in fnmatch.filter(filenames, "*.so"):
+                            binaries.append(os.path.join(dirpath, filename))
+
+                        for filename in fnmatch.filter(filenames, "*.run"):
+                            binaries.append(os.path.join(dirpath, filename))
+
                     for binary in binaries:
 
-                        result = 1
-
-                        while result != 0:
-
-                            print "Signing %s..." % os.path.basename(binary)
-                            sys.stdout.flush()
-
-                            result = subprocess.call([signcmd,
-                            "/d", "Omnia Creator",
-                            "/du", "www.omniacreator.com",
-                            "/f", certificate,
-                            "/p", args.sign,
-                            binary])
+                        subprocess.call(["python",
+                        os.path.join(__folder__, "deploy-sign.py"),
+                        "-D", pro_description, "-U", pro_url,
+                        digital_certificate, args.sign, binary])
 
                 if args.upload:
 
-                    print "Logging onto FTP Server..." + '\n'
-                    sys.stdout.flush()
-
-                    server = ftplib.FTP(FTP_SITE, FTP_USER, args.upload)
-
-                    print server.getwelcome() + '\n'
-
-                    print "Uploading to FTP Server..."
+                    print "Uploading Installer..."
                     sys.stdout.flush()
 
                     binaries = []
@@ -396,19 +455,21 @@ if __name__ == "__main__":
                         for filename in fnmatch.filter(filenames, "*.exe"):
                             binaries.append(os.path.join(dirpath, filename))
 
-                        for filename in fnmatch.filter(filenames, "*.run"):
-                            binaries.append(os.path.join(dirpath, filename))
-
                         for filename in fnmatch.filter(filenames, "*.app"):
                             binaries.append(os.path.join(dirpath, filename))
 
-                    for binary in binaries:
-                        if os.path.getsize(binary):
-                            info = UploadInfo(binary)
-                            server.storbinary("STOR "+os.path.basename(binary),
-                            open(binary, "rb"), FTP_SIZE, info.callback)
+                        for filename in fnmatch.filter(filenames, "*.run"):
+                            binaries.append(os.path.join(dirpath, filename))
 
-                    server.cwd("components")
+                    for binary in binaries:
+
+                        subprocess.call(["python",
+                        os.path.join(__folder__, "deploy-upload.py"),
+                        SFTP_USERNAME, args.upload, pro_domain,
+                        "wp-download/installer", binary])
+
+                    print "Uploading Components..."
+                    sys.stdout.flush()
 
                     binaries = []
 
@@ -418,55 +479,19 @@ if __name__ == "__main__":
                             binaries.append(os.path.join(dirpath, filename))
 
                     for binary in binaries:
-                        if os.path.getsize(binary):
-                            info = UploadInfo(binary)
-                            server.storbinary("STOR "+os.path.basename(binary),
-                            open(binary, "rb"), FTP_SIZE, info.callback)
 
-                    server.quit()
+                        subprocess.call(["python",
+                        os.path.join(__folder__, "deploy-upload.py"),
+                        SFTP_USERNAME, args.upload, pro_domain,
+                        "wp-download/installer/components", binary])
 
-    elif args.make_mode == "clean":
+                    print "Uploading Libraries..."
+                    sys.stdout.flush()
 
-        if os.path.exists(install_folder):
-
-            print "Cleaning Install Folder contents..."
-            sys.stdout.flush()
-
-            for file_object in os.listdir(install_folder):
-                file_object_path = os.path.join(install_folder, file_object)
-
-                if os.path.isfile(file_object_path):
-                    os.remove(file_object_path)
-                else:
-                    shutil.rmtree(file_object_path, True)
-
-        if os.path.exists(installer_folder):
-
-            print "Cleaning Installer Folder contents..."
-            sys.stdout.flush()
-
-            for file_object in os.listdir(installer_folder):
-                file_object_path = os.path.join(installer_folder, file_object)
-
-                if os.path.isfile(file_object_path):
-                    os.remove(file_object_path)
-                else:
-                    shutil.rmtree(file_object_path, True)
-
-        print "Cleaning Build Folder contents..."
-        sys.stdout.flush()
-
-        for file_object in os.listdir(build_folder):
-            file_object_path = os.path.join(build_folder, file_object)
-
-            if os.path.isfile(file_object_path):
-                os.remove(file_object_path)
-            else:
-                shutil.rmtree(file_object_path, True)
-
-    elif args.make_mode != "debug":
-
-        sys.exit("Make Mode \"%s\" does not exist!" % args.make_mode)
+                    subprocess.call(["python",
+                    os.path.join(__folder__, "deploy-upload.py"),
+                    SFTP_USERNAME, args.upload, pro_domain,
+                    "wp-download", library_directory])
 
 ################################################################################
 # @file
