@@ -1,38 +1,43 @@
 <project>
     <shortName>omniacreator</shortName>
     <fullName>Omnia Creator</fullName>
-    <version>0.1</version>
+    <version>0.0</version>
+    <buildTag></buildTag>
     <readmeFile>README.md</readmeFile>
     <licenseFile>LICENSE.mit</licenseFile>
     <leftImage>../icons/internal/icon/installer-icon163x314.png</leftImage>
     <logoImage>../icons/internal/icon/installer-icon48x48.png</logoImage>
-    <splashImage>../icons/internal/about/about600x300.png</splashImage>
+    <splashImage>../icons/internal/about/installer-about524x262.png</splashImage>
     <wmImage>../icons/internal/icon/icon48x48.png</wmImage>
     <defaultLanguage>auto</defaultLanguage>
     <allowLanguageSelection>1</allowLanguageSelection>
     <componentList>
         <component>
             <name>main_component</name>
-            <description>${product_fullname}</description>
+            <description>${pro_full_name}</description>
             <canBeEdited>0</canBeEdited>
-            <detailedDescription>${product_fullname}</detailedDescription>
+            <detailedDescription>${pro_full_name} IDE and shared files</detailedDescription>
             <selected>1</selected>
             <show>1</show>
             <desktopShortcutList>
                 <shortcut>
-                    <comment>Launch ${product_fullname}</comment>
-                    <exec>${installdir}/ide/qtcreator/bin/${product_shortname}.sh -client</exec>
+                    <comment>Launch ${pro_full_name}</comment>
+                    <exec>${installdir}/ide/qtcreator/bin/${pro_short_name}.sh -client</exec>
                     <icon>${installdir}/ide/qtcreator/icons/icon.png</icon>
-                    <name>${product_fullname}</name>
-                    <noPinToStart>0</noPinToStart>
+                    <name>${pro_full_name}</name>
                     <path>${user_home_directory}</path>
                     <platforms>all</platforms>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <windowsExec>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</windowsExec>
+                    <windowsExec>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</windowsExec>
                     <windowsExecArgs>-client</windowsExecArgs>
-                    <windowsIcon>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</windowsIcon>
+                    <windowsIcon>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</windowsIcon>
                     <windowsPath>${user_home_directory}</windowsPath>
+                    <ruleList>
+                        <isTrue>
+                            <value>${main_component_create_desktop_shortcut}</value>
+                        </isTrue>
+                    </ruleList>
                 </shortcut>
             </desktopShortcutList>
             <folderList>
@@ -122,19 +127,23 @@
                 <associateWindowsFileExtension>
                     <abortOnError>0</abortOnError>
                     <extensions>.c .i</extensions>
-                    <friendlyName>${product_fullname} C File Extensions</friendlyName>
+                    <friendlyName>${pro_full_name} .c file extensions</friendlyName>
                     <icon>${installdir}\ide\qtcreator\icons\c.ico</icon>
                     <mimeType>text/c</mimeType>
-                    <progID>${product_shortname}.${product_shortname}.c</progID>
+                    <progID>${pro_short_name}.${pro_short_name}.c</progID>
+                    <showMessageOnError>0</showMessageOnError>
                     <commandList>
                         <command>
                             <makeDefault>0</makeDefault>
-                            <runProgram>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</runProgram>
+                            <runProgram>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</runProgram>
                             <runProgramArguments>-client "%1"</runProgramArguments>
                             <verb>Open</verb>
                         </command>
                     </commandList>
                     <ruleList>
+                        <isTrue>
+                            <value>${main_component_associate_c_file_extensions}</value>
+                        </isTrue>
                         <platformTest>
                             <type>windows</type>
                         </platformTest>
@@ -143,19 +152,23 @@
                 <associateWindowsFileExtension>
                     <abortOnError>0</abortOnError>
                     <extensions>.cpp .ii .cc .cp .cxx .c++</extensions>
-                    <friendlyName>${product_fullname} CPP File Extensions</friendlyName>
+                    <friendlyName>${pro_full_name} .cpp file extensions</friendlyName>
                     <icon>${installdir}\ide\qtcreator\icons\cpp.ico</icon>
                     <mimeType>text/cpp</mimeType>
-                    <progID>${product_shortname}.${product_shortname}.cpp</progID>
+                    <progID>${pro_short_name}.${pro_short_name}.cpp</progID>
+                    <showMessageOnError>0</showMessageOnError>
                     <commandList>
                         <command>
                             <makeDefault>0</makeDefault>
-                            <runProgram>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</runProgram>
+                            <runProgram>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</runProgram>
                             <runProgramArguments>-client "%1"</runProgramArguments>
                             <verb>Open</verb>
                         </command>
                     </commandList>
                     <ruleList>
+                        <isTrue>
+                            <value>${main_component_associate_cpp_file_extensions}</value>
+                        </isTrue>
                         <platformTest>
                             <type>windows</type>
                         </platformTest>
@@ -164,19 +177,23 @@
                 <associateWindowsFileExtension>
                     <abortOnError>0</abortOnError>
                     <extensions>.h .hpp .hh .hp .hxx .h++</extensions>
-                    <friendlyName>${product_fullname} H File Extensions</friendlyName>
+                    <friendlyName>${pro_full_name} .h file extensions</friendlyName>
                     <icon>${installdir}\ide\qtcreator\icons\h.ico</icon>
                     <mimeType>text/h</mimeType>
-                    <progID>${product_shortname}.${product_shortname}.h</progID>
+                    <progID>${pro_short_name}.${pro_short_name}.h</progID>
+                    <showMessageOnError>0</showMessageOnError>
                     <commandList>
                         <command>
                             <makeDefault>0</makeDefault>
-                            <runProgram>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</runProgram>
+                            <runProgram>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</runProgram>
                             <runProgramArguments>-client "%1"</runProgramArguments>
                             <verb>Open</verb>
                         </command>
                     </commandList>
                     <ruleList>
+                        <isTrue>
+                            <value>${main_component_associate_h_file_extensions}</value>
+                        </isTrue>
                         <platformTest>
                             <type>windows</type>
                         </platformTest>
@@ -185,19 +202,23 @@
                 <associateWindowsFileExtension>
                     <abortOnError>0</abortOnError>
                     <extensions>.s .sx</extensions>
-                    <friendlyName>${product_fullname} S File Extensions</friendlyName>
+                    <friendlyName>${pro_full_name} .s file extensions</friendlyName>
                     <icon>${installdir}\ide\qtcreator\icons\s.ico</icon>
                     <mimeType>text/s</mimeType>
-                    <progID>${product_shortname}.${product_shortname}.s</progID>
+                    <progID>${pro_short_name}.${pro_short_name}.s</progID>
+                    <showMessageOnError>0</showMessageOnError>
                     <commandList>
                         <command>
                             <makeDefault>0</makeDefault>
-                            <runProgram>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</runProgram>
+                            <runProgram>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</runProgram>
                             <runProgramArguments>-client "%1"</runProgramArguments>
                             <verb>Open</verb>
                         </command>
                     </commandList>
                     <ruleList>
+                        <isTrue>
+                            <value>${main_component_associate_s_file_extensions}</value>
+                        </isTrue>
                         <platformTest>
                             <type>windows</type>
                         </platformTest>
@@ -206,8 +227,12 @@
                 <addGroupToUser>
                     <abortOnError>0</abortOnError>
                     <groupname>dialout</groupname>
+                    <showMessageOnError>0</showMessageOnError>
                     <username>${system_username}</username>
                     <ruleList>
+                        <isTrue>
+                            <value>${main_component_add_group_to_user}</value>
+                        </isTrue>
                         <platformTest>
                             <type>linux</type>
                         </platformTest>
@@ -219,8 +244,12 @@
                     <abortOnError>0</abortOnError>
                     <extensions>.c .i</extensions>
                     <mimeType>text/c</mimeType>
-                    <progID>${product_shortname}.${product_shortname}.c</progID>
+                    <progID>${pro_short_name}.${pro_short_name}.c</progID>
+                    <showMessageOnError>0</showMessageOnError>
                     <ruleList>
+                        <isTrue>
+                            <value>${main_component_associate_c_file_extensions}</value>
+                        </isTrue>
                         <platformTest>
                             <type>windows</type>
                         </platformTest>
@@ -230,8 +259,12 @@
                     <abortOnError>0</abortOnError>
                     <extensions>.cpp .ii .cc .cp .cxx .c++</extensions>
                     <mimeType>text/cpp</mimeType>
-                    <progID>${product_shortname}.${product_shortname}.cpp</progID>
+                    <progID>${pro_short_name}.${pro_short_name}.cpp</progID>
+                    <showMessageOnError>0</showMessageOnError>
                     <ruleList>
+                        <isTrue>
+                            <value>${main_component_associate_cpp_file_extensions}</value>
+                        </isTrue>
                         <platformTest>
                             <type>windows</type>
                         </platformTest>
@@ -241,8 +274,12 @@
                     <abortOnError>0</abortOnError>
                     <extensions>.h .hpp .hh .hp .hxx .h++</extensions>
                     <mimeType>text/h</mimeType>
-                    <progID>${product_shortname}.${product_shortname}.h</progID>
+                    <progID>${pro_short_name}.${pro_short_name}.h</progID>
+                    <showMessageOnError>0</showMessageOnError>
                     <ruleList>
+                        <isTrue>
+                            <value>${main_component_associate_h_file_extensions}</value>
+                        </isTrue>
                         <platformTest>
                             <type>windows</type>
                         </platformTest>
@@ -252,8 +289,12 @@
                     <abortOnError>0</abortOnError>
                     <extensions>.s .sx</extensions>
                     <mimeType>text/s</mimeType>
-                    <progID>${product_shortname}.${product_shortname}.s</progID>
+                    <progID>${pro_short_name}.${pro_short_name}.s</progID>
+                    <showMessageOnError>0</showMessageOnError>
                     <ruleList>
+                        <isTrue>
+                            <value>${main_component_associate_s_file_extensions}</value>
+                        </isTrue>
                         <platformTest>
                             <type>windows</type>
                         </platformTest>
@@ -262,8 +303,12 @@
                 <deleteGroupFromUser>
                     <abortOnError>0</abortOnError>
                     <groupname>dialout</groupname>
+                    <showMessageOnError>0</showMessageOnError>
                     <username>${system_username}</username>
                     <ruleList>
+                        <isTrue>
+                            <value>${main_component_add_group_to_user}</value>
+                        </isTrue>
                         <platformTest>
                             <type>linux</type>
                         </platformTest>
@@ -272,17 +317,22 @@
             </preUninstallationActionList>
             <startMenuShortcutList>
                 <startMenuShortcut>
-                    <comment>Launch ${product_fullname}</comment>
-                    <name>${product_fullname}</name>
+                    <comment>Launch ${pro_full_name}</comment>
+                    <name>${pro_full_name}</name>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <windowsExec>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</windowsExec>
+                    <windowsExec>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</windowsExec>
                     <windowsExecArgs>-client</windowsExecArgs>
-                    <windowsIcon>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</windowsIcon>
+                    <windowsIcon>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</windowsIcon>
                     <windowsPath>${user_home_directory}</windowsPath>
+                    <ruleList>
+                        <isTrue>
+                            <value>${main_component_create_start_menu_shortcut_folder}</value>
+                        </isTrue>
+                    </ruleList>
                 </startMenuShortcut>
                 <startMenuShortcut>
-                    <comment>Uninstall ${product_fullname}</comment>
+                    <comment>Uninstall ${pro_full_name}</comment>
                     <name>Uninstall</name>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
@@ -290,87 +340,109 @@
                     <windowsExecArgs></windowsExecArgs>
                     <windowsIcon>${installdir}\${uninstallerName}.exe</windowsIcon>
                     <windowsPath></windowsPath>
+                    <ruleList>
+                        <isTrue>
+                            <value>${main_component_create_start_menu_shortcut_folder}</value>
+                        </isTrue>
+                    </ruleList>
                 </startMenuShortcut>
                 <startMenuLinkShortcut>
-                    <comment>${product_fullname} Website</comment>
+                    <comment>${pro_full_name} Website</comment>
                     <name>Website</name>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <url>www.${product_shortname}.com</url>
-                    <windowsIcon>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</windowsIcon>
+                    <url>${pro_url}</url>
+                    <windowsIcon>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</windowsIcon>
+                    <ruleList>
+                        <isTrue>
+                            <value>${main_component_create_start_menu_shortcut_folder}</value>
+                        </isTrue>
+                    </ruleList>
                 </startMenuLinkShortcut>
             </startMenuShortcutList>
+        </component>
+        <component>
+            <name>ftdi_component</name>
+            <description>FTDI VCP Drivers</description>
+            <canBeEdited>0</canBeEdited>
+            <detailedDescription>FTDI VCP drivers and D2XX library</detailedDescription>
+            <selected>1</selected>
+            <show>1</show>
+            <folderList>
+                <folder>
+                    <description>FTDI Folder Windows</description>
+                    <destination>${installdir}/tools/ftdi</destination>
+                    <name>ftdi_folder_windows</name>
+                    <platforms>windows</platforms>
+                    <distributionFileList>
+                        <distributionDirectory>
+                            <allowWildcards>1</allowWildcards>
+                            <origin>../tools/ftdi/*</origin>
+                        </distributionDirectory>
+                    </distributionFileList>
+                </folder>
+            </folderList>
+        </component>
+        <component>
+            <name>cmake_component</name>
+            <description>CMake Build System</description>
+            <canBeEdited>0</canBeEdited>
+            <detailedDescription>CMake Build System command line tools</detailedDescription>
+            <selected>1</selected>
+            <show>1</show>
+            <folderList>
+                <folder>
+                    <description>CMake Folder All</description>
+                    <destination>${installdir}/tools/cmake</destination>
+                    <name>cmake_folder_all</name>
+                    <platforms>all</platforms>
+                    <distributionFileList>
+                        <distributionDirectory>
+                            <allowWildcards>1</allowWildcards>
+                            <origin>../tools/cmake/*</origin>
+                        </distributionDirectory>
+                    </distributionFileList>
+                </folder>
+            </folderList>
+            <postInstallationActionList>
+                <addDirectoryToPath>
+                    <abortOnError>0</abortOnError>
+                    <insertAt>end</insertAt>
+                    <path>${installdir}/tools/cmake/bin</path>
+                    <showMessageOnError>0</showMessageOnError>
+                    <ruleList>
+                        <isTrue>
+                            <value>${cmake_component_add_directory_to_path}</value>
+                        </isTrue>
+                    </ruleList>
+                </addDirectoryToPath>
+            </postInstallationActionList>
+            <preUninstallationActionList>
+                <removeDirectoryFromPath>
+                    <abortOnError>0</abortOnError>
+                    <path>${installdir}/tools/cmake/bin</path>
+                    <showMessageOnError>0</showMessageOnError>
+                    <ruleList>
+                        <isTrue>
+                            <value>${cmake_component_add_directory_to_path}</value>
+                        </isTrue>
+                    </ruleList>
+                </removeDirectoryFromPath>
+            </preUninstallationActionList>
         </component>
         <componentGroup>
             <name>toolchains_component</name>
             <description>Tools Chains</description>
             <canBeEdited>0</canBeEdited>
-            <detailedDescription>Tool Chains</detailedDescription>
+            <detailedDescription>Microcontroller software developement kits</detailedDescription>
             <selected>1</selected>
             <show>1</show>
             <componentList>
                 <component>
-                    <name>ftdi_component</name>
-                    <description>FTDI Drivers</description>
-                    <canBeEdited>0</canBeEdited>
-                    <detailedDescription>FTDI Drivers</detailedDescription>
-                    <selected>1</selected>
-                    <show>1</show>
-                    <folderList>
-                        <folder>
-                            <description>FTDI Folder Windows</description>
-                            <destination>${installdir}/tools/ftdi</destination>
-                            <name>ftdi_folder_windows</name>
-                            <platforms>windows</platforms>
-                            <distributionFileList>
-                                <distributionDirectory>
-                                    <allowWildcards>1</allowWildcards>
-                                    <origin>../tools/ftdi/*</origin>
-                                </distributionDirectory>
-                            </distributionFileList>
-                        </folder>
-                    </folderList>
-                </component>
-                <component>
-                    <name>cmake_component</name>
-                    <description>CMake Build System</description>
-                    <canBeEdited>0</canBeEdited>
-                    <detailedDescription>CMake Build System</detailedDescription>
-                    <selected>1</selected>
-                    <show>1</show>
-                    <folderList>
-                        <folder>
-                            <description>CMake Folder All</description>
-                            <destination>${installdir}/tools/cmake</destination>
-                            <name>cmake_folder_all</name>
-                            <platforms>all</platforms>
-                            <distributionFileList>
-                                <distributionDirectory>
-                                    <allowWildcards>1</allowWildcards>
-                                    <origin>../tools/cmake/*</origin>
-                                </distributionDirectory>
-                            </distributionFileList>
-                        </folder>
-                    </folderList>
-                    <postInstallationActionList>
-                        <addDirectoryToPath>
-                            <abortOnError>0</abortOnError>
-                            <insertAt>end</insertAt>
-                            <path>${installdir}/tools/cmake/bin</path>
-                        </addDirectoryToPath>
-                    </postInstallationActionList>
-                    <preUninstallationActionList>
-                        <removeDirectoryFromPath>
-                            <abortOnError>0</abortOnError>
-                            <path>${installdir}/tools/cmake/bin</path>
-                        </removeDirectoryFromPath>
-                    </preUninstallationActionList>
-                </component>
-                <component>
                     <name>arduino_component</name>
                     <description>Arduino SDK</description>
                     <canBeEdited>1</canBeEdited>
-                    <detailedDescription>Arduino SDK</detailedDescription>
+                    <detailedDescription>Software developement kit for Arduino users. Install this component if you plan to use ${pro_full_name} with an Arduino.</detailedDescription>
                     <downloadable>1</downloadable>
                     <selected>1</selected>
                     <show>1</show>
@@ -426,23 +498,33 @@
                             <abortOnError>0</abortOnError>
                             <insertAt>end</insertAt>
                             <path>${installdir}/tools/arduino/hardware/tools/avr/bin</path>
+                            <showMessageOnError>0</showMessageOnError>
+                            <ruleList>
+                                <isTrue>
+                                    <value>${arduino_component_add_directory_to_path}</value>
+                                </isTrue>
+                            </ruleList>
                         </addDirectoryToPath>
                         <associateWindowsFileExtension>
                             <abortOnError>0</abortOnError>
                             <extensions>.ino .pde</extensions>
-                            <friendlyName>${product_fullname} INO File Extensions</friendlyName>
+                            <friendlyName>${pro_full_name} .ino file extensions</friendlyName>
                             <icon>${installdir}\ide\qtcreator\icons\arduino.ico</icon>
                             <mimeType>text/cpp</mimeType>
-                            <progID>${product_shortname}.${product_shortname}.ino</progID>
+                            <progID>${pro_short_name}.${pro_short_name}.ino</progID>
+                            <showMessageOnError>0</showMessageOnError>
                             <commandList>
                                 <command>
                                     <makeDefault>0</makeDefault>
-                                    <runProgram>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</runProgram>
+                                    <runProgram>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</runProgram>
                                     <runProgramArguments>-client "%1"</runProgramArguments>
                                     <verb>Open</verb>
                                 </command>
                             </commandList>
                             <ruleList>
+                                <isTrue>
+                                    <value>${arduino_component_associate_file_extensions}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -453,13 +535,23 @@
                         <removeDirectoryFromPath>
                             <abortOnError>0</abortOnError>
                             <path>${installdir}/tools/arduino/hardware/tools/avr/bin</path>
+                            <showMessageOnError>0</showMessageOnError>
+                            <ruleList>
+                                <isTrue>
+                                    <value>${arduino_component_add_directory_to_path}</value>
+                                </isTrue>
+                            </ruleList>
                         </removeDirectoryFromPath>
                         <removeWindowsFileAssociation>
                             <abortOnError>0</abortOnError>
                             <extensions>.ino .pde</extensions>
                             <mimeType>text/cpp</mimeType>
-                            <progID>${product_shortname}.${product_shortname}.ino</progID>
+                            <progID>${pro_short_name}.${pro_short_name}.ino</progID>
+                            <showMessageOnError>0</showMessageOnError>
                             <ruleList>
+                                <isTrue>
+                                    <value>${arduino_component_associate_file_extensions}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -471,7 +563,7 @@
                     <name>propeller_component</name>
                     <description>Propeller SDK</description>
                     <canBeEdited>1</canBeEdited>
-                    <detailedDescription>Propeller SDK</detailedDescription>
+                    <detailedDescription>Software developement kit for Propeller chip users. Install this component if you plan to use ${pro_full_name} with a Propeller chip.</detailedDescription>
                     <downloadable>1</downloadable>
                     <selected>1</selected>
                     <show>1</show>
@@ -495,6 +587,9 @@
                             <platforms>windows</platforms>
                             <distributionFileList>
                                 <distributionFile>
+                                    <origin>../icons/external/parallax/stamp.ico</origin>
+                                </distributionFile>
+                                <distributionFile>
                                     <origin>../icons/external/parallax/propeller.ico</origin>
                                 </distributionFile>
                                 <distributionFile>
@@ -514,6 +609,9 @@
                             <name>propeller_icons_folder_linux</name>
                             <platforms>linux</platforms>
                             <distributionFileList>
+                                <distributionFile>
+                                    <origin>../icons/external/parallax/stamp.png</origin>
+                                </distributionFile>
                                 <distributionFile>
                                     <origin>../icons/external/parallax/propeller.png</origin>
                                 </distributionFile>
@@ -535,6 +633,9 @@
                             <platforms>osx</platforms>
                             <distributionFileList>
                                 <distributionFile>
+                                    <origin>../icons/external/parallax/stamp.icns</origin>
+                                </distributionFile>
+                                <distributionFile>
                                     <origin>../icons/external/parallax/propeller.icns</origin>
                                 </distributionFile>
                                 <distributionFile>
@@ -554,23 +655,33 @@
                             <abortOnError>0</abortOnError>
                             <insertAt>end</insertAt>
                             <path>${installdir}/tools/propeller/propeller-gcc/bin</path>
+                            <showMessageOnError>0</showMessageOnError>
+                            <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_add_directory_to_path}</value>
+                                </isTrue>
+                            </ruleList>
                         </addDirectoryToPath>
                         <associateWindowsFileExtension>
                             <abortOnError>0</abortOnError>
                             <extensions>.side</extensions>
-                            <friendlyName>${product_fullname} SIDE File Extensions</friendlyName>
+                            <friendlyName>${pro_full_name} .side file extensions</friendlyName>
                             <icon>${installdir}\ide\qtcreator\icons\side.ico</icon>
                             <mimeType>text/plain</mimeType>
-                            <progID>${product_shortname}.${product_shortname}.side</progID>
+                            <progID>${pro_short_name}.${pro_short_name}.side</progID>
+                            <showMessageOnError>0</showMessageOnError>
                             <commandList>
                                 <command>
                                     <makeDefault>0</makeDefault>
-                                    <runProgram>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</runProgram>
+                                    <runProgram>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</runProgram>
                                     <runProgramArguments>-client "%1"</runProgramArguments>
                                     <verb>Open</verb>
                                 </command>
                             </commandList>
                             <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_associate_side_file_extensions}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -579,19 +690,23 @@
                         <associateWindowsFileExtension>
                             <abortOnError>0</abortOnError>
                             <extensions>.spin</extensions>
-                            <friendlyName>${product_fullname} SPIN File Extensions</friendlyName>
+                            <friendlyName>${pro_full_name} .spin file extensions</friendlyName>
                             <icon>${installdir}\ide\qtcreator\icons\spin.ico</icon>
                             <mimeType>text/plain</mimeType>
-                            <progID>${product_shortname}.${product_shortname}.spin</progID>
+                            <progID>${pro_short_name}.${pro_short_name}.spin</progID>
+                            <showMessageOnError>0</showMessageOnError>
                             <commandList>
                                 <command>
                                     <makeDefault>0</makeDefault>
-                                    <runProgram>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</runProgram>
+                                    <runProgram>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</runProgram>
                                     <runProgramArguments>-client "%1"</runProgramArguments>
                                     <verb>Open</verb>
                                 </command>
                             </commandList>
                             <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_associate_spin_file_extensions}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -600,19 +715,23 @@
                         <associateWindowsFileExtension>
                             <abortOnError>0</abortOnError>
                             <extensions>.binary</extensions>
-                            <friendlyName>${product_fullname} BINARY File Extensions</friendlyName>
+                            <friendlyName>${pro_full_name} .binary file extensions</friendlyName>
                             <icon>${installdir}\ide\qtcreator\icons\spin.ico</icon>
                             <mimeType>application/octet-stream</mimeType>
-                            <progID>${product_shortname}.${product_shortname}.binary</progID>
+                            <progID>${pro_short_name}.${pro_short_name}.binary</progID>
+                            <showMessageOnError>0</showMessageOnError>
                             <commandList>
                                 <command>
                                     <makeDefault>0</makeDefault>
-                                    <runProgram>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</runProgram>
+                                    <runProgram>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</runProgram>
                                     <runProgramArguments>-client "%1"</runProgramArguments>
                                     <verb>Open</verb>
                                 </command>
                             </commandList>
                             <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_associate_binary_file_extensions}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -621,19 +740,23 @@
                         <associateWindowsFileExtension>
                             <abortOnError>0</abortOnError>
                             <extensions>.eeprom</extensions>
-                            <friendlyName>${product_fullname} EEPROM File Extensions</friendlyName>
+                            <friendlyName>${pro_full_name} .eeprom file extensions</friendlyName>
                             <icon>${installdir}\ide\qtcreator\icons\spin.ico</icon>
                             <mimeType>application/octet-stream</mimeType>
-                            <progID>${product_shortname}.${product_shortname}.eeprom</progID>
+                            <progID>${pro_short_name}.${pro_short_name}.eeprom</progID>
+                            <showMessageOnError>0</showMessageOnError>
                             <commandList>
                                 <command>
                                     <makeDefault>0</makeDefault>
-                                    <runProgram>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</runProgram>
+                                    <runProgram>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</runProgram>
                                     <runProgramArguments>-client "%1"</runProgramArguments>
                                     <verb>Open</verb>
                                 </command>
                             </commandList>
                             <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_associate_eeprom_file_extensions}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -642,7 +765,11 @@
                         <addFonts>
                             <abortOnError>0</abortOnError>
                             <files>${installdir}\tools\propeller\bin\Parallax.ttf</files>
+                            <showMessageOnError>0</showMessageOnError>
                             <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_add_fonts}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -653,13 +780,23 @@
                         <removeDirectoryFromPath>
                             <abortOnError>0</abortOnError>
                             <path>${installdir}/tools/propeller/propeller-gcc/bin</path>
+                            <showMessageOnError>0</showMessageOnError>
+                            <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_add_directory_to_path}</value>
+                                </isTrue>
+                            </ruleList>
                         </removeDirectoryFromPath>
                         <removeWindowsFileAssociation>
                             <abortOnError>0</abortOnError>
                             <extensions>.side</extensions>
                             <mimeType>text/plain</mimeType>
-                            <progID>${product_shortname}.${product_shortname}.side</progID>
+                            <progID>${pro_short_name}.${pro_short_name}.side</progID>
+                            <showMessageOnError>0</showMessageOnError>
                             <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_associate_side_file_extensions}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -669,8 +806,12 @@
                             <abortOnError>0</abortOnError>
                             <extensions>.spin</extensions>
                             <mimeType>text/plain</mimeType>
-                            <progID>${product_shortname}.${product_shortname}.spin</progID>
+                            <progID>${pro_short_name}.${pro_short_name}.spin</progID>
+                            <showMessageOnError>0</showMessageOnError>
                             <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_associate_spin_file_extensions}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -680,8 +821,12 @@
                             <abortOnError>0</abortOnError>
                             <extensions>.binary</extensions>
                             <mimeType>application/octet-stream</mimeType>
-                            <progID>${product_shortname}.${product_shortname}.binary</progID>
+                            <progID>${pro_short_name}.${pro_short_name}.binary</progID>
+                            <showMessageOnError>0</showMessageOnError>
                             <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_associate_binary_file_extensions}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -691,8 +836,12 @@
                             <abortOnError>0</abortOnError>
                             <extensions>.eeprom</extensions>
                             <mimeType>application/octet-stream</mimeType>
-                            <progID>${product_shortname}.${product_shortname}.eeprom</progID>
+                            <progID>${pro_short_name}.${pro_short_name}.eeprom</progID>
+                            <showMessageOnError>0</showMessageOnError>
                             <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_associate_eeprom_file_extensions}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -701,7 +850,11 @@
                         <removeFonts>
                             <abortOnError>0</abortOnError>
                             <files>${installdir}\tools\propeller\bin\Parallax.tff</files>
+                            <showMessageOnError>0</showMessageOnError>
                             <ruleList>
+                                <isTrue>
+                                    <value>${propeller_component_add_fonts}</value>
+                                </isTrue>
                                 <platformTest>
                                     <type>windows</type>
                                 </platformTest>
@@ -735,7 +888,7 @@
             <actionList>
                 <showQuestion>
                     <default>yes</default>
-                    <text>Setup must uninstall the previous ${product_fullname} version. Continue?</text>
+                    <text>Setup must uninstall the previous ${pro_full_name} version. Continue?</text>
                     <title>Setup</title>
                     <variable>uninstall_version</variable>
                 </showQuestion>
@@ -747,7 +900,7 @@
                                 <runProgram>
                                     <program>${installdir}/${uninstallerName}.${platform_exec_suffix}</program>
                                     <programArguments>--mode unattended</programArguments>
-                                    <progressText>Uninstalling previous ${product_fullname} version...</progressText>
+                                    <progressText>Uninstalling previous ${pro_full_name} version...</progressText>
                                 </runProgram>
                             </actionList>
                         </showProgressDialog>
@@ -786,208 +939,749 @@
     </preInstallationActionList>
     <postInstallationActionList>
         <deleteFile>
+            <abortOnError>0</abortOnError>
             <path>${project.rollbackBackupDirectory}</path>
+            <showMessageOnError>0</showMessageOnError>
         </deleteFile>
+        <findFile>
+            <abortOnError>0</abortOnError>
+            <baseDirectory>${installdir}\tools\ftdi</baseDirectory>
+            <pattern>*.exe</pattern>
+            <showMessageOnError>0</showMessageOnError>
+            <variable>cdm_exe</variable>
+            <ruleList>
+                <componentTest>
+                    <logic>selected</logic>
+                    <name>ftdi_component</name>
+                </componentTest>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
+            </ruleList>
+        </findFile>
     </postInstallationActionList>
     <postUninstallationActionList>
-        <showQuestion>
-            <default>no</default>
-            <text>Delete ${product_fullname} application data?</text>
-            <title>Setup</title>
-            <variable>delete_application_data</variable>
-            <ruleList>
-                <platformTest>
-                    <type>windows</type>
-                </platformTest>
-            </ruleList>
-        </showQuestion>
-        <if>
-            <actionList>
-                <showQuestion>
-                    <default>no</default>
-                    <text>Are you sure? The files will be permanently deleted.</text>
-                    <title>Setup</title>
-                    <variable>delete_application_data</variable>
-                </showQuestion>
-                <if>
-                    <actionList>
-                        <deleteFile>
-                            <path>${windows_folder_appdata}/${product_fullname}</path>
-                        </deleteFile>
-                    </actionList>
-                    <conditionRuleList>
-                        <isTrue>
-                            <value>${delete_application_data}</value>
-                        </isTrue>
-                    </conditionRuleList>
-                </if>
-            </actionList>
-            <conditionRuleList>
-                <isTrue>
-                    <value>${delete_application_data}</value>
-                </isTrue>
-            </conditionRuleList>
-        </if>
-        <showQuestion>
-            <default>no</default>
-            <text>Delete ${product_fullname} documents folder?</text>
-            <title>Setup</title>
-            <variable>delete_documents_folder</variable>
-            <ruleList>
-                <platformTest>
-                    <type>windows</type>
-                </platformTest>
-            </ruleList>
-        </showQuestion>
-        <if>
-            <actionList>
-                <showQuestion>
-                    <default>no</default>
-                    <text>Are you sure? The files will be permanently deleted.</text>
-                    <title>Setup</title>
-                    <variable>delete_documents_folder</variable>
-                </showQuestion>
-                <if>
-                    <actionList>
-                        <deleteFile>
-                            <path>${windows_folder_personal}/${product_fullname}</path>
-                        </deleteFile>
-                    </actionList>
-                    <conditionRuleList>
-                        <isTrue>
-                            <value>${delete_documents_folder}</value>
-                        </isTrue>
-                    </conditionRuleList>
-                </if>
-            </actionList>
-            <conditionRuleList>
-                <isTrue>
-                    <value>${delete_documents_folder}</value>
-                </isTrue>
-            </conditionRuleList>
-        </if>
         <deleteFile>
-            <path>${system_temp_directory}/${product_fullname}</path>
+            <abortOnError>0</abortOnError>
+            <path>${system_temp_directory}/${pro_full_name}</path>
+            <showMessageOnError>0</showMessageOnError>
         </deleteFile>
+        <!--
+            <showQuestion>
+                <default>no</default>
+                <text>Delete ${pro_full_name} application data?</text>
+                <title>Setup</title>
+                <variable>delete_application_data</variable>
+                <ruleList>
+                    <platformTest>
+                        <type>windows</type>
+                    </platformTest>
+                </ruleList>
+            </showQuestion>
+            <if>
+                <actionList>
+                    <showQuestion>
+                        <default>no</default>
+                        <text>Are you sure? The files will be permanently deleted.</text>
+                        <title>Setup</title>
+                        <variable>delete_application_data</variable>
+                    </showQuestion>
+                    <if>
+                        <actionList>
+                            <deleteFile>
+                                <abortOnError>0</abortOnError>
+                                <path>${windows_folder_appdata}/${pro_full_name}</path>
+                                <showMessageOnError>0</showMessageOnError>
+                            </deleteFile>
+                        </actionList>
+                        <conditionRuleList>
+                            <isTrue>
+                                <value>${delete_application_data}</value>
+                            </isTrue>
+                        </conditionRuleList>
+                    </if>
+                </actionList>
+                <conditionRuleList>
+                    <isTrue>
+                        <value>${delete_application_data}</value>
+                    </isTrue>
+                </conditionRuleList>
+            </if>
+            <showQuestion>
+                <default>no</default>
+                <text>Delete ${pro_full_name} documents folder?</text>
+                <title>Setup</title>
+                <variable>delete_documents_folder</variable>
+                <ruleList>
+                    <platformTest>
+                        <type>windows</type>
+                    </platformTest>
+                </ruleList>
+            </showQuestion>
+            <if>
+                <actionList>
+                    <showQuestion>
+                        <default>no</default>
+                        <text>Are you sure? The files will be permanently deleted.</text>
+                        <title>Setup</title>
+                        <variable>delete_documents_folder</variable>
+                    </showQuestion>
+                    <if>
+                        <actionList>
+                            <deleteFile>
+                                <abortOnError>0</abortOnError>
+                                <path>${windows_folder_personal}/${pro_full_name}</path>
+                                <showMessageOnError>0</showMessageOnError>
+                            </deleteFile>
+                        </actionList>
+                        <conditionRuleList>
+                            <isTrue>
+                                <value>${delete_documents_folder}</value>
+                            </isTrue>
+                        </conditionRuleList>
+                    </if>
+                </actionList>
+                <conditionRuleList>
+                    <isTrue>
+                        <value>${delete_documents_folder}</value>
+                    </isTrue>
+                </conditionRuleList>
+            </if>
+        -->
     </postUninstallationActionList>
     <allowAddRemoveComponents>1</allowAddRemoveComponents>
     <allowComponentSelection>1</allowComponentSelection>
-    <cdromDirectory>${product_shortname}-${product_version}-${platform_name}-cdrom</cdromDirectory>
     <componentsDirectory>.</componentsDirectory>
-    <componentsUrl>http://www.${product_shortname}.com/downloads/installer/components</componentsUrl>
+    <componentsUrl>${pro_url_wo_slash}/wp-download/installer/components/</componentsUrl>
+    <compressPackedFiles>1</compressPackedFiles>
     <compressionAlgorithm>lzma</compressionAlgorithm>
-    <description>${product_fullname} is a cross platform C/C++ IDE for Makers</description>
-    <disableSplashScreen>1</disableSplashScreen>
+    <description></description>
     <enableRetinaDisplayImages>1</enableRetinaDisplayImages>
     <enableRollback>1</enableRollback>
     <enableTimestamp>0</enableTimestamp>
-    <nativePackageName>${product_fullname}</nativePackageName>
+    <ignoreInvalidOptions>1</ignoreInvalidOptions>
+    <nativePackageName>${pro_full_name}</nativePackageName>
+    <osxApplicationBundleIdentifier>com.${pro_short_name}.installer</osxApplicationBundleIdentifier>
     <outputDirectory>installer</outputDirectory>
-    <productComments>${product_fullname} is a cross platform C/C++ IDE for Makers</productComments>
-    <productContact>${product_shortname}@${product_shortname}.com</productContact>
-    <productDisplayIcon>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</productDisplayIcon>
-    <productUrlHelpLink>www.${product_shortname}.com</productUrlHelpLink>
-    <productUrlInfoAbout>www.${product_shortname}.com</productUrlInfoAbout>
-    <release>${product_version}</release>
+    <productComments>${pro_description}</productComments>
+    <productContact>${pro_email}</productContact>
+    <productDisplayIcon>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</productDisplayIcon>
+    <productUrlHelpLink>${pro_url_wo_slash}/help/</productUrlHelpLink>
+    <productUrlInfoAbout>${pro_url}</productUrlInfoAbout>
+    <release>${pro_version}</release>
+    <replaceLockedFilesOnReboot>1</replaceLockedFilesOnReboot>
+    <requirePasswordOnStartup>0</requirePasswordOnStartup>
     <saveRelativePaths>1</saveRelativePaths>
     <showDownloadableComponentsProxyPage>0</showDownloadableComponentsProxyPage>
     <singleInstanceCheck>1</singleInstanceCheck>
     <splashScreenDelay>5</splashScreenDelay>
-    <summary>${product_fullname} is a cross platform C/C++ IDE for Makers</summary>
-    <vendor>${product_fullname}</vendor>
+    <summary>${pro_description}</summary>
+    <vendor>${pro_vendor}</vendor>
     <windowsExecutableIcon>../icons/internal/installer/installer/installer.ico</windowsExecutableIcon>
-    <windowsResourceComments>${product_fullname} is a cross platform C/C++ IDE for Makers</windowsResourceComments>
-    <windowsResourceFileDescription>${product_fullname} is a cross platform C/C++ IDE for Makers</windowsResourceFileDescription>
-    <windowsResourceFileVersion>${product_version}</windowsResourceFileVersion>
-    <windowsResourceInternalName>${product_shortname}</windowsResourceInternalName>
-    <windowsResourceLegalCopyright>Copyright  (c) 2014 ${project.vendor}</windowsResourceLegalCopyright>
-    <windowsResourceLegalTrademarks>Copyright (c) 2014 ${project.vendor}</windowsResourceLegalTrademarks>
-    <windowsResourceOriginalFilename>${product_shortname}-${product_version}-${platform_name}-installer.exe</windowsResourceOriginalFilename>
+    <windowsResourceComments>${pro_description}</windowsResourceComments>
+    <windowsResourceFileDescription>${pro_full_name}</windowsResourceFileDescription>
+    <windowsResourceFileVersion>${pro_version}</windowsResourceFileVersion>
+    <windowsResourceInternalName>${pro_short_name}</windowsResourceInternalName>
+    <windowsResourceLegalCopyright>Copyright ${pro_copyright}</windowsResourceLegalCopyright>
+    <windowsResourceOriginalFilename>${pro_short_name}-${pro_version}-${platform_name}-installer.exe</windowsResourceOriginalFilename>
     <windowsUninstallerExecutableIcon>../icons/internal/installer/uninstaller/uninstaller.ico</windowsUninstallerExecutableIcon>
     <finalPageActionList>
         <runProgram>
             <abortOnError>0</abortOnError>
             <program>${installdir}\tools\arduino\drivers\dpinst-amd64.exe</program>
             <programArguments></programArguments>
-            <progressText>Install Arduino Driver</progressText>
+            <progressText>Install Arduino drivers</progressText>
             <showMessageOnError>0</showMessageOnError>
             <ruleList>
-                <platformTest>
-                    <type>windows-x64</type>
-                </platformTest>
                 <componentTest>
                     <logic>selected</logic>
                     <name>arduino_component</name>
                 </componentTest>
+                <platformTest>
+                    <type>windows-x64</type>
+                </platformTest>
             </ruleList>
         </runProgram>
         <runProgram>
             <abortOnError>0</abortOnError>
             <program>${installdir}\tools\arduino\drivers\dpinst-x86.exe</program>
             <programArguments></programArguments>
-            <progressText>Install Arduino Driver</progressText>
+            <progressText>Install Arduino drivers</progressText>
             <showMessageOnError>0</showMessageOnError>
             <ruleList>
-                <platformTest>
-                    <type>windows-x86</type>
-                </platformTest>
                 <componentTest>
                     <logic>selected</logic>
                     <name>arduino_component</name>
                 </componentTest>
+                <platformTest>
+                    <type>windows-x86</type>
+                </platformTest>
             </ruleList>
         </runProgram>
-        <findFile>
-            <baseDirectory>${installdir}/tools/ftdi</baseDirectory>
-            <pattern>*.exe</pattern>
-            <variable>cdm_exe</variable>
-        </findFile>
         <runProgram>
             <abortOnError>0</abortOnError>
             <program>${installdir}\tools\ftdi\${cdm_exe}.exe</program>
             <programArguments></programArguments>
-            <progressText>Install FTDI Driver</progressText>
+            <progressText>Install FTDI drivers</progressText>
             <showMessageOnError>0</showMessageOnError>
             <ruleList>
-                <platformTest>
-                    <type>windows</type>
-                </platformTest>
                 <componentTest>
                     <logic>selected</logic>
                     <name>ftdi_component</name>
                 </componentTest>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
             </ruleList>
         </runProgram>
         <runProgram>
             <abortOnError>0</abortOnError>
-            <program>${installdir}\ide\qtcreator\bin\${product_shortname}.exe</program>
-            <programArguments></programArguments>
-            <progressText>Run ${product_fullname}</progressText>
+            <program>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</program>
+            <programArguments>-client &amp;</programArguments>
+            <progressText>Launch ${pro_full_name}</progressText>
             <showMessageOnError>0</showMessageOnError>
             <ruleList>
-                <platformTest>
-                    <type>windows</type>
-                </platformTest>
                 <componentTest>
                     <logic>selected</logic>
                     <name>main_component</name>
                 </componentTest>
+                <platformTest>
+                    <type>windows</type>
+                </platformTest>
+            </ruleList>
+        </runProgram>
+        <runProgram>
+            <abortOnError>0</abortOnError>
+            <program>${installdir}/ide/qtcreator/bin/${pro_short_name}.sh</program>
+            <programArguments>-client &amp;</programArguments>
+            <progressText>Launch ${pro_full_name}</progressText>
+            <showMessageOnError>0</showMessageOnError>
+            <ruleList>
+                <componentTest>
+                    <logic>selected</logic>
+                    <name>main_component</name>
+                </componentTest>
+                <platformTest>
+                    <type>linux</type>
+                </platformTest>
+            </ruleList>
+        </runProgram>
+        <runProgram>
+            <abortOnError>0</abortOnError>
+            <program>open</program>
+            <programArguments>"${installdir}/ide/qtcreator/bin/${pro_short_name}.app" --args -client</programArguments>
+            <progressText>Launch ${pro_full_name}</progressText>
+            <showMessageOnError>0</showMessageOnError>
+            <ruleList>
+                <componentTest>
+                    <logic>selected</logic>
+                    <name>main_component</name>
+                </componentTest>
+                <platformTest>
+                    <type>osx</type>
+                </platformTest>
             </ruleList>
         </runProgram>
     </finalPageActionList>
     <parameterList>
+        <stringParameter>
+            <name>pro_full_name</name>
+            <title>Full Name</title>
+            <description>Full Name</description>
+            <explanation>Full Name</explanation>
+            <value>Omnia Creator</value>
+            <default>Omnia Creator</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>pro_full_name_wo_spaces</name>
+            <title>Full Name Wo Spaces</title>
+            <description>Full Name Wo Spaces</description>
+            <explanation>Full Name Wo Spaces</explanation>
+            <value>OmniaCreator</value>
+            <default>OmniaCreator</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>pro_short_name</name>
+            <title>Short Name</title>
+            <description>Short Name</description>
+            <explanation>Short Name</explanation>
+            <value>omniacreator</value>
+            <default>omniacreator</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>pro_version</name>
+            <title>Version</title>
+            <description>Version</description>
+            <explanation>Version</explanation>
+            <value>0.0</value>
+            <default>0.0</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>pro_vendor</name>
+            <title>Vendor</title>
+            <description>Vendor</description>
+            <explanation>Vendor</explanation>
+            <value>${pro_full_name}</value>
+            <default>${pro_full_name}</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>pro_copyright</name>
+            <title>Copyright</title>
+            <description>Copyright</description>
+            <explanation>Copyright</explanation>
+            <value>(c) 2014 Kwabena W. Agyeman</value>
+            <default>(c) 2014 Kwabena W. Agyeman</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>pro_category</name>
+            <title>Category</title>
+            <description>Category</description>
+            <explanation>Category</explanation>
+            <value>Microcontrollers</value>
+            <default>Microcontrollers</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>pro_description</name>
+            <title>Description</title>
+            <description>Description</description>
+            <explanation>Description</explanation>
+            <value>Omnia Creator is a cross platform C/C++ IDE for Makers</value>
+            <default>Omnia Creator is a cross platform C/C++ IDE for Makers</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>pro_domain_name</name>
+            <title>Domain Name</title>
+            <description>Domain Name</description>
+            <explanation>Domain Name</explanation>
+            <value>${pro_short_name}.com</value>
+            <default>${pro_short_name}.com</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>pro_url</name>
+            <title>URL</title>
+            <description>URL</description>
+            <explanation>URL</explanation>
+            <value>http://${pro_domain_name}/</value>
+            <default>http://${pro_domain_name}/</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>pro_url_wo_slash</name>
+            <title>URL Wo Slash</title>
+            <description>URL Wo Slash</description>
+            <explanation>URL Wo Slash</explanation>
+            <value>http://${pro_domain_name}</value>
+            <default>http://${pro_domain_name}</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <stringParameter>
+            <name>pro_email</name>
+            <title>Email</title>
+            <description>Email</description>
+            <explanation>Email</explanation>
+            <value>${pro_short_name}@${pro_domain_name}</value>
+            <default></default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <ask>0</ask>
+            <cliOptionShow>0</cliOptionShow>
+            <width>40</width>
+        </stringParameter>
+        <choiceParameter>
+            <name>installation_type</name>
+            <title>Installation Type</title>
+            <description>Choose the installation type that best suits your needs.</description>
+            <explanation>Choose the installation type that best suits your needs.</explanation>
+            <value>express_install</value>
+            <default>express_install</default>
+            <allowEmptyValue>0</allowEmptyValue>
+            <cliOptionShow>0</cliOptionShow>
+            <displayType>radiobuttons</displayType>
+            <insertBefore>components</insertBefore>
+            <ordering>default</ordering>
+            <width>40</width>
+            <optionList>
+                <option>
+                    <description>Install ${pro_full_name} using recommended settings</description>
+                    <image></image>
+                    <text>Express Install</text>
+                    <value>express_install</value>
+                </option>
+                <option>
+                    <description>Install ${pro_full_name} using custom settings</description>
+                    <image></image>
+                    <text>Custom Install</text>
+                    <value>custom_install</value>
+                </option>
+            </optionList>
+            <postShowPageActionList>
+                <if>
+                    <actionList>
+                        <setInstallerVariable>
+                            <name>allowComponentSelection</name>
+                            <value>1</value>
+                        </setInstallerVariable>
+                    </actionList>
+                    <conditionRuleList>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${installation_type}</text>
+                            <value>custom_install</value>
+                        </compareText>
+                    </conditionRuleList>
+                    <elseActionList>
+                        <setInstallerVariable>
+                            <name>allowComponentSelection</name>
+                            <value>0</value>
+                        </setInstallerVariable>
+                    </elseActionList>
+                </if>
+            </postShowPageActionList>
+            <validationActionList>
+                <throwError>
+                    <text>Not enough disk space available</text>
+                    <ruleList>
+                        <checkFreeDiskSpace>
+                            <logic>less</logic>
+                            <path>${installdir}</path>
+                            <size>${required_diskspace}</size>
+                        </checkFreeDiskSpace>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${installation_type}</text>
+                            <value>express_install</value>
+                        </compareText>
+                    </ruleList>
+                </throwError>
+            </validationActionList>
+        </choiceParameter>
         <directoryParameter>
             <name>installdir</name>
             <description>Installer.Parameter.installdir.description</description>
             <explanation>Installer.Parameter.installdir.explanation</explanation>
-            <value>${platform_install_prefix}/${product_fullname}</value>
-            <default>${platform_install_prefix}/${product_fullname}</default>
+            <value>${platform_install_prefix}/${pro_full_name}</value>
+            <default>${platform_install_prefix}/${pro_full_name}</default>
             <allowEmptyValue>0</allowEmptyValue>
-            <cliOptionName>prefix</cliOptionName>
+            <cliOptionShow>0</cliOptionShow>
+            <insertAfter>components</insertAfter>
             <mustBeWritable>1</mustBeWritable>
             <mustExist>0</mustExist>
+            <osxBundlesAreFiles>1</osxBundlesAreFiles>
             <width>40</width>
+            <ruleList>
+                <compareText>
+                    <logic>equals</logic>
+                    <text>${installation_type}</text>
+                    <value>custom_install</value>
+                </compareText>
+            </ruleList>
+            <validationActionList>
+                <throwError>
+                    <text>Not enough disk space available</text>
+                    <ruleList>
+                        <checkFreeDiskSpace>
+                            <logic>less</logic>
+                            <path>${installdir}</path>
+                            <size>${required_diskspace}</size>
+                        </checkFreeDiskSpace>
+                        <compareText>
+                            <logic>equals</logic>
+                            <text>${installation_type}</text>
+                            <value>custom_install</value>
+                        </compareText>
+                    </ruleList>
+                </throwError>
+            </validationActionList>
         </directoryParameter>
+        <parameterGroup>
+            <name>main_component_options</name>
+            <title>${pro_full_name} Options</title>
+            <explanation>Configure the ${pro_full_name} component options</explanation>
+            <value>0</value>
+            <default>0</default>
+            <cliOptionShow>0</cliOptionShow>
+            <parameterList>
+                <booleanParameter>
+                    <name>main_component_create_desktop_shortcut</name>
+                    <description>Create a desktop shortcut</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                    <ruleList>
+                        <platformTest>
+                            <type>windows</type>
+                        </platformTest>
+                    </ruleList>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>main_component_create_start_menu_shortcut_folder</name>
+                    <description>Create a start menu shortcut folder</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                    <ruleList>
+                        <platformTest>
+                            <type>windows</type>
+                        </platformTest>
+                    </ruleList>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>main_component_associate_c_file_extensions</name>
+                    <description>Associate .c files with ${pro_full_name}</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>main_component_associate_cpp_file_extensions</name>
+                    <description>Associate .cpp files with ${pro_full_name}</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>main_component_associate_h_file_extensions</name>
+                    <description>Associate .h files with ${pro_full_name}</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>main_component_associate_s_file_extensions</name>
+                    <description>Associate .s files with ${pro_full_name}</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>main_component_add_group_to_user</name>
+                    <description>Add the user to dialout group</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                    <ruleList>
+                        <platformTest>
+                            <type>linux</type>
+                        </platformTest>
+                    </ruleList>
+                </booleanParameter>
+            </parameterList>
+            <ruleList>
+                <componentTest>
+                    <logic>selected</logic>
+                    <name>main_component</name>
+                </componentTest>
+                <compareText>
+                    <logic>equals</logic>
+                    <text>${installation_type}</text>
+                    <value>custom_install</value>
+                </compareText>
+            </ruleList>
+        </parameterGroup>
+        <parameterGroup>
+            <name>cmake_component_options</name>
+            <title>CMake Build System Options</title>
+            <explanation>Configure the CMake Build System component options</explanation>
+            <value>0</value>
+            <default>0</default>
+            <cliOptionShow>0</cliOptionShow>
+            <parameterList>
+                <booleanParameter>
+                    <name>cmake_component_add_directory_to_path</name>
+                    <description>Add the CMake Build System tools to the path</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+            </parameterList>
+            <ruleList>
+                <componentTest>
+                    <logic>selected</logic>
+                    <name>cmake_component</name>
+                </componentTest>
+                <compareText>
+                    <logic>equals</logic>
+                    <text>${installation_type}</text>
+                    <value>custom_install</value>
+                </compareText>
+            </ruleList>
+        </parameterGroup>
+        <parameterGroup>
+            <name>arduino_component_options</name>
+            <title>Arduino SDK Options</title>
+            <explanation>Configure the Arduino SDK component options</explanation>
+            <value>0</value>
+            <default>0</default>
+            <cliOptionShow>0</cliOptionShow>
+            <parameterList>
+                <booleanParameter>
+                    <name>arduino_component_add_directory_to_path</name>
+                    <description>Add the Arduino SDK tools to the path</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>arduino_component_associate_file_extensions</name>
+                    <description>Associate Arduino .ino files with ${pro_full_name}</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+            </parameterList>
+            <ruleList>
+                <componentTest>
+                    <logic>selected</logic>
+                    <name>arduino_component</name>
+                </componentTest>
+                <compareText>
+                    <logic>equals</logic>
+                    <text>${installation_type}</text>
+                    <value>custom_install</value>
+                </compareText>
+            </ruleList>
+        </parameterGroup>
+        <parameterGroup>
+            <name>propeller_component_options</name>
+            <title>Propeller SDK Options</title>
+            <explanation>Configure the Propeller SDK component options</explanation>
+            <value>0</value>
+            <default>0</default>
+            <cliOptionShow>0</cliOptionShow>
+            <parameterList>
+                <booleanParameter>
+                    <name>propeller_component_add_directory_to_path</name>
+                    <description>Add the Propeller SDK tools to the path</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>propeller_component_associate_side_file_extensions</name>
+                    <description>Associate Propeller .side files with ${pro_full_name}</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>propeller_component_associate_spin_file_extensions</name>
+                    <description>Associate Propeller .spin files with ${pro_full_name}</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>propeller_component_associate_binary_file_extensions</name>
+                    <description>Associate Propeller .binary files with ${pro_full_name}</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>propeller_component_associate_eeprom_file_extensions</name>
+                    <description>Associate Propeller .eeprom files with ${pro_full_name}</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                </booleanParameter>
+                <booleanParameter>
+                    <name>propeller_component_add_fonts</name>
+                    <description>Install the Parallax font</description>
+                    <explanation></explanation>
+                    <value>1</value>
+                    <default>1</default>
+                    <cliOptionShow>0</cliOptionShow>
+                    <displayStyle>checkbox-left</displayStyle>
+                    <ruleList>
+                        <platformTest>
+                            <type>windows</type>
+                        </platformTest>
+                    </ruleList>
+                </booleanParameter>
+            </parameterList>
+            <ruleList>
+                <componentTest>
+                    <logic>selected</logic>
+                    <name>propeller_component</name>
+                </componentTest>
+                <compareText>
+                    <logic>equals</logic>
+                    <text>${installation_type}</text>
+                    <value>custom_install</value>
+                </compareText>
+            </ruleList>
+        </parameterGroup>
     </parameterList>
 </project>
 

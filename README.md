@@ -21,11 +21,11 @@ Windows Guide
   * Add **${cmake-installdir}\bin** to your path
 * Install [BitRock InstallBuilder 9.0.1 Multiplatform (Professional) for Windows](http://installbuilder.bitrock.com/download-installbuilder-for-qt-step-2.html) *(or better)*
   * Add **${installbuilder-installdir}\bin** to your path
+  * Add **${installbuilder-installdir}\autoupdate\bin** to your path
 * Install [ActivePython 2.7.6 for Windows (x86)](http://www.activestate.com/activepython/downloads) *(or better)*
 * Install [ActivePerl 5.16.3 for Windows (x86)](http://www.activestate.com/activeperl/downloads) *(or better)*
 * Install [ActiveTcl 8.6.1 for Windows (x86)](http://www.activestate.com/activetcl/downloads) *(or better)*
 * Install [Doxygen 1.8.7 for Windows](http://www.stack.nl/~dimitri/doxygen/download.html) *(or better)*
-  * Add **${doxygen-installdir}\bin** to your path
 * Install [Graphviz 2.38.0 for Windows](http://www.graphviz.org/Download_windows.php) *(or better)*
   * Add **${graphviz-installdir}\bin** to your path
 * ***(OPTIONAL)*** Install [kSgin 2.0.0 for Windows](http://codesigning.ksoftware.net) *(or better)*

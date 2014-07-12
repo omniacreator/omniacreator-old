@@ -1,0 +1,19 @@
+<autoUpdateProject>
+    <shortName>omniacreator</shortName>
+    <fullName>Omnia Creator</fullName>
+    <version>1.0</version>
+    <leftImage>../icons/internal/icon/installer-icon163x314.png</leftImage>
+    <logoImage>../icons/internal/icon/installer-icon48x48.png</logoImage>
+    <splashImage>../icons/internal/about/installer-about524x262.png</splashImage>
+    <wmImage>../icons/internal/icon/icon48x48.png</wmImage>
+    <singleInstanceCheck>1</singleInstanceCheck>
+    <splashScreenDelay>5</splashScreenDelay>
+    <vendor>Omnia Creator</vendor>
+    <windowsExecutableIcon>../icons/internal/icon/icon.ico</windowsExecutableIcon>
+    <windowsResourceComments>Omnia Creator is a cross platform C/C++ IDE for Makers</windowsResourceComments>
+    <windowsResourceFileDescription>Omnia Creator</windowsResourceFileDescription>
+    <windowsResourceFileVersion>1.0</windowsResourceFileVersion>
+    <windowsResourceInternalName>omniacreator</windowsResourceInternalName>
+    <windowsResourceLegalCopyright>Copyright (c) Kwabena W. Agyeman 2014</windowsResourceLegalCopyright>
+    <windowsResourceOriginalFilename>omniacreator-1.0-windows-updater.exe</windowsResourceOriginalFilename>
+</autoUpdateProject>

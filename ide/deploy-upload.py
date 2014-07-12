@@ -52,7 +52,6 @@ if __name__ == "__main__":
 
         command.append("WinSCP.com")
 
-        command.append("/nointeractiveinput")
         command.append("/command")
 
         command.append("\"option batch abort\"")
@@ -61,26 +60,27 @@ if __name__ == "__main__":
         command.append("\"open -hostkey sftp://" +
         sftp_username + ":" + sftp_password + "@" + sftp_domainname + ":22\"")
 
+        command.append("\"put " +
+        "\"" + file_to_upload + "\"" + " " +
+        "\"" + sftp_path.strip("/") + "/" +
+        os.path.basename(file_to_upload) + "\"" + "\"")
+
         if os.path.isdir(file_to_upload):
-            command.append("\"synchronize -delete -mirror remote " +
-            "\"" + file_to_upload + "\"" + " " +
-            "\"" + sftp_path.strip("/") + "/" +
-            os.path.basename(file_to_upload) + "\"" + "\"")
-        else:
-            command.append("\"put " +
+
+            command.append("\"synchronize -delete remote " +
             "\"" + file_to_upload + "\"" + " " +
             "\"" + sftp_path.strip("/") + "/" +
             os.path.basename(file_to_upload) + "\"" + "\"")
 
         command.append("\"exit\"")
 
-        if subprocess.call(' '.join(command)):
+        if subprocess.check_call(' '.join(command)):
 
             print "Trying again..."
             print "Uploading %s..." % os.path.basename(file_to_upload)
             sys.stdout.flush()
 
-            if subprocess.call(' '.join(command)):
+            if subprocess.check_call(' '.join(command)):
 
                 print "Uploading Failed!"
                 sys.stdout.flush()

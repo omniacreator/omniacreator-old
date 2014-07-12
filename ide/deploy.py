@@ -29,6 +29,9 @@ LIBRARY_DIRECTORY = "share/qtcreator/libraries"
 INSTALLER_PROJECT = "../installer/installer.xml"
 INSTALLER_LICENSE = "../installer/private-license.xml"
 
+UPDATER_PROJECT = "../installer/auto.xml"
+UPDATER_INFORMATION = "../installer/update.xml"
+
 DIGITAL_CERTIFICATE = "../installer/private-signature.pfx"
 
 SFTP_USERNAME = "omni2127468419"
@@ -68,7 +71,7 @@ if __name__ == "__main__":
     pro_file = os.path.abspath(os.path.join(__folder__,
     PRO_FILE))
 
-    library_directory = os.path.abspath(os.path.join(installer_folder,
+    library_directory = os.path.abspath(os.path.join(install_folder,
     LIBRARY_DIRECTORY))
 
     installer_project = os.path.abspath(os.path.join(__folder__,
@@ -76,6 +79,12 @@ if __name__ == "__main__":
 
     installer_license = os.path.abspath(os.path.join(__folder__,
     INSTALLER_LICENSE))
+
+    updater_project = os.path.abspath(os.path.join(__folder__,
+    UPDATER_PROJECT))
+
+    updater_information = os.path.abspath(os.path.join(__folder__,
+    UPDATER_INFORMATION))
 
     digital_certificate = os.path.abspath(os.path.join(__folder__,
     DIGITAL_CERTIFICATE))
@@ -106,6 +115,14 @@ if __name__ == "__main__":
             sys.exit("Installer License \"%s\" "
                      "does not exist!" % installer_license)
 
+        if not os.path.exists(updater_project):
+            sys.exit("Updater Project \"%s\" "
+                     "does not exist!" % updater_project)
+
+        if not os.path.exists(updater_information):
+            sys.exit("Updater Information \"%s\" "
+                     "does not exist!" % updater_information)
+
     if args.sign:
 
         if not os.path.exists(digital_certificate):
@@ -115,14 +132,13 @@ if __name__ == "__main__":
     # Import Pro Settings Begin ###############################################
 
     dict = {}
-    regex = re.compile(r"(.+?)\s+=\s+\"(.+?)\"")
+    regex = re.compile(r"^\s*(PROJECT_.+?)\s*=\s*\"?(.+?)\"?\s*$")
 
     with open(pro_file) as file:
         for line in file:
             match = regex.search(line)
 
-            if match:
-                dict[match.group(1)] = match.group(2)
+            if match: dict[match.group(1)] = match.group(2)
 
     pro_full_name = dict["PROJECT_FULL_NAME"]
     pro_full_name_wo_spaces = re.sub(r"[ _]", "", pro_full_name)
@@ -132,9 +148,10 @@ if __name__ == "__main__":
     pro_copyright = dict["PROJECT_COPYRIGHT"]
     pro_category = dict["PROJECT_CATEGORY"]
     pro_description = dict["PROJECT_DESCRIPTION"]
-    pro_url = "www." + pro_short_name + ".com"
-    pro_email = pro_short_name + "@" + pro_short_name + ".com"
-    pro_domain = pro_short_name + ".com"
+    pro_domain_name = pro_short_name + ".com"
+    pro_url = "http://www." + pro_domain_name + "/"
+    pro_url_wo_slash = "http://www." + pro_domain_name
+    pro_email = pro_short_name + "@" + pro_domain_name
 
     # Import Pro Settings End #################################################
 
@@ -143,12 +160,20 @@ if __name__ == "__main__":
         if args.install_files:
 
             shutil.rmtree(install_folder, True)
-            os.makedirs(install_folder)
+
+            try:
+                os.makedirs(install_folder)
+            except OSError:
+                pass
 
         if args.build_installer:
 
             shutil.rmtree(installer_folder, True)
-            os.makedirs(installer_folder)
+
+            try:
+                os.makedirs(installer_folder)
+            except OSError:
+                pass
 
     # Deploy ##################################################################
 
@@ -196,12 +221,12 @@ if __name__ == "__main__":
         print "Deploying CMake Files to build dir..."
         sys.stdout.flush()
 
-        subprocess.call(["python", os.path.join(__folder__,
+        subprocess.check_call(["python", os.path.join(__folder__,
         "qt-creator-src/share/qtcreator/"
         "cmake-board-modules/deploy-cmake-board-modules.py"),
         build_folder])
 
-        subprocess.call(["python", os.path.join(__folder__,
+        subprocess.check_call(["python", os.path.join(__folder__,
         "qt-creator-src/share/qtcreator/"
         "cmake-board-types/deploy-cmake-board-types.py"),
         build_folder])
@@ -209,7 +234,7 @@ if __name__ == "__main__":
         print "Deploying FFTW to build dir..."
         sys.stdout.flush()
 
-        subprocess.call(["python", os.path.join(__folder__,
+        subprocess.check_call(["python", os.path.join(__folder__,
         "qt-creator-src/src/plugins/"
         "omniacreator/deploy-fftw3.py"),
         build_folder])
@@ -219,7 +244,7 @@ if __name__ == "__main__":
             print "Deploying The Interface Library to build dir..."
             sys.stdout.flush()
 
-            subprocess.call(["python", os.path.join(__folder__,
+            subprocess.check_call(["python", os.path.join(__folder__,
             "qt-creator-src/src/plugins/"
             "omniacreator/deploy-interfacelibrary.py"),
             build_folder])
@@ -227,12 +252,12 @@ if __name__ == "__main__":
             print "Deploying CMake Files to install dir..."
             sys.stdout.flush()
 
-            subprocess.call(["python", os.path.join(__folder__,
+            subprocess.check_call(["python", os.path.join(__folder__,
             "qt-creator-src/share/qtcreator/"
             "cmake-board-modules/deploy-cmake-board-modules.py"),
             install_folder])
 
-            subprocess.call(["python", os.path.join(__folder__,
+            subprocess.check_call(["python", os.path.join(__folder__,
             "qt-creator-src/share/qtcreator/"
             "cmake-board-types/deploy-cmake-board-types.py"),
             install_folder])
@@ -240,7 +265,7 @@ if __name__ == "__main__":
             print "Deploying FFTW to install dir..."
             sys.stdout.flush()
 
-            subprocess.call(["python", os.path.join(__folder__,
+            subprocess.check_call(["python", os.path.join(__folder__,
             "qt-creator-src/src/plugins/"
             "omniacreator/deploy-fftw3.py"),
             install_folder])
@@ -248,7 +273,7 @@ if __name__ == "__main__":
             print "Deploying The Interface Library to install dir..."
             sys.stdout.flush()
 
-            subprocess.call(["python", os.path.join(__folder__,
+            subprocess.check_call(["python", os.path.join(__folder__,
             "qt-creator-src/src/plugins/"
             "omniacreator/deploy-interfacelibrary.py"),
             install_folder])
@@ -258,28 +283,28 @@ if __name__ == "__main__":
                 print "Executing Make Install..."
                 sys.stdout.flush()
 
-                subprocess.call([args.make_path, "-f",
+                subprocess.check_call([args.make_path, "-f",
                 os.path.join(build_folder, "Makefile"),
                 "install", "INSTALL_ROOT=\""+install_folder+'\"'])
 
             print "Executing Make Deploy Qt..."
             sys.stdout.flush()
 
-            subprocess.call([args.make_path, "-f",
+            subprocess.check_call([args.make_path, "-f",
             os.path.join(build_folder, "Makefile"),
             "deployqt", "INSTALL_ROOT=\""+install_folder+'\"'])
 
             print "Executing Make Deploy Artifacts..."
             sys.stdout.flush()
 
-            subprocess.call([args.make_path, "-f",
+            subprocess.check_call([args.make_path, "-f",
             os.path.join(build_folder, "Makefile"),
             "deployartifacts", "INSTALL_ROOT=\""+install_folder+'\"'])
 
             print "Executing Make Cleanup..."
             sys.stdout.flush()
 
-            # PHONY COMMAND subprocess.call([args.make_path, "-f",
+            # PHONY COMMAND subprocess.check_call([args.make_path, "-f",
             # PHONY COMMAND os.path.join(build_folder, "Makefile"),
             # PHONY COMMAND "cleanup", "INSTALL_ROOT=\""+install_folder+'\"'])
 
@@ -360,6 +385,57 @@ if __name__ == "__main__":
 
             # Cleanup End #####################################################
 
+            if args.build_installer:
+
+                print "Building Updater..."
+                sys.stdout.flush()
+
+                text = subprocess.check_output(["customize",
+                "build", updater_project])
+
+                found = False
+                regex = re.compile(r"^\s*(.*?autoupdate.*?)\s*$")
+
+                for line in text.splitlines():
+                    match = regex.search(line)
+
+                    if match:
+                        found = True
+
+                        name = match.group(1)
+                        dir = os.path.dirname(name)
+                        ext = os.path.splitext(name)[1]
+
+                        shutil.move(name,
+                        os.path.join(install_folder, "bin", "update" + ext))
+                        shutil.rmtree(os.path.join(dir, ".."), True)
+
+                        ini = os.path.join(install_folder, "bin", "update.ini")
+
+                        with open(ini, "w") as file:
+
+                            version = 0
+                            multiplier = 100 * 100 * 100
+
+                            for part in pro_version.split('.'):
+                                version += int(part) * multiplier
+                                multiplier /= 100
+
+                            file.write("[Update]\n\n")
+                            file.write("url = %s\n" %
+                            (pro_url + "wp-download/installer/update.xml"))
+                            file.write("version_id = %d\n" % version)
+                            file.write("check_for_updates = 1\n")
+                            file.write("update_download_location = %s\n\n" %
+                            ("${system_temp_directory}"))
+                            file.write("[Proxy]\n\n")
+                            file.write("enable = 1\n")
+
+                        break
+
+                if not found:
+                    sys.exit("Automatic Updater not found!")
+
             if args.sign:
 
                 print "Signing Executables..."
@@ -389,7 +465,7 @@ if __name__ == "__main__":
 
                 for binary in binaries:
 
-                    subprocess.call(["python",
+                    subprocess.check_call(["python",
                     os.path.join(__folder__, "deploy-sign.py"),
                     "-D", pro_description, "-U", pro_url,
                     digital_certificate, args.sign, binary])
@@ -399,14 +475,23 @@ if __name__ == "__main__":
                 print "Building Installer..."
                 sys.stdout.flush()
 
-                subprocess.call(" ".join(["builder-cli",
+                subprocess.check_call(" ".join(["builder-cli",
                 "build", '\"' + installer_project + '\"',
                 "--verbose",
                 "--license", '\"' + installer_license + '\"',
                 "--setvars",
-                "project.shortName=" + '\"' + pro_short_name + '\"',
-                "project.fullName=" + '\"' + pro_full_name + '\"',
-                "project.version=" '\"' + pro_version + '\"',
+                "pro_full_name="+'\"'+pro_full_name+'\"',
+                "pro_full_name_wo_spaces="+'\"'+pro_full_name_wo_spaces+'\"',
+                "pro_short_name="+'\"'+pro_short_name+'\"',
+                "pro_version="+'\"'+pro_version+'\"',
+                "pro_vendor="+'\"'+pro_vendor+'\"',
+                "pro_copyright="+'\"'+pro_copyright+'\"',
+                "pro_category="+'\"'+pro_category+'\"',
+                "pro_description="+'\"'+pro_description+'\"',
+                "pro_domain_name="+'\"'+pro_domain_name+'\"',
+                "pro_url="+'\"'+pro_url+'\"',
+                "pro_url_wo_slash="+'\"'+pro_url_wo_slash+'\"',
+                "pro_email="+'\"'+pro_email+'\"',
                 "--downloadable-components"]))
 
                 if args.sign:
@@ -438,12 +523,20 @@ if __name__ == "__main__":
 
                     for binary in binaries:
 
-                        subprocess.call(["python",
+                        subprocess.check_call(["python",
                         os.path.join(__folder__, "deploy-sign.py"),
                         "-D", pro_description, "-U", pro_url,
                         digital_certificate, args.sign, binary])
 
                 if args.upload:
+
+                    print "Uploading Updater Information File..."
+                    sys.stdout.flush()
+
+                    subprocess.check_call(["python",
+                    os.path.join(__folder__, "deploy-upload.py"),
+                    SFTP_USERNAME, args.upload, pro_domain_name,
+                    "wp-download/installer", updater_information])
 
                     print "Uploading Installer..."
                     sys.stdout.flush()
@@ -463,10 +556,13 @@ if __name__ == "__main__":
 
                     for binary in binaries:
 
-                        subprocess.call(["python",
+                        subprocess.check_call(["python",
                         os.path.join(__folder__, "deploy-upload.py"),
-                        SFTP_USERNAME, args.upload, pro_domain,
+                        SFTP_USERNAME, args.upload, pro_domain_name,
                         "wp-download/installer", binary])
+
+                        print "\n"
+                        sys.stdout.flush()
 
                     print "Uploading Components..."
                     sys.stdout.flush()
@@ -480,17 +576,20 @@ if __name__ == "__main__":
 
                     for binary in binaries:
 
-                        subprocess.call(["python",
+                        subprocess.check_call(["python",
                         os.path.join(__folder__, "deploy-upload.py"),
-                        SFTP_USERNAME, args.upload, pro_domain,
+                        SFTP_USERNAME, args.upload, pro_domain_name,
                         "wp-download/installer/components", binary])
+
+                        print "\n"
+                        sys.stdout.flush()
 
                     print "Uploading Libraries..."
                     sys.stdout.flush()
 
-                    subprocess.call(["python",
+                    subprocess.check_call(["python",
                     os.path.join(__folder__, "deploy-upload.py"),
-                    SFTP_USERNAME, args.upload, pro_domain,
+                    SFTP_USERNAME, args.upload, pro_domain_name,
                     "wp-download", library_directory])
 
 ################################################################################
