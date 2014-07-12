@@ -44,6 +44,9 @@ if __name__ == "__main__":
     for folder in REPO:
         os.chdir(os.path.join(__folder__, folder))
 
+        print "\nIn %s..." % os.path.abspath(os.path.join(__folder__, folder))
+        sys.stdout.flush()
+
         # no check_call
         subprocess.call(["git",
                          "add",
@@ -60,7 +63,7 @@ if __name__ == "__main__":
                               "--all"],
                               stdin = subprocess.PIPE)
 
-        #p.communicate(args.username + '\n' + args.password + '\n')
+        p.communicate(args.username + '\r\n' + args.password + '\r\n')
 
 ################################################################################
 # @file
