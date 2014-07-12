@@ -55,10 +55,12 @@ if __name__ == "__main__":
                          "-m",
                          args.message])
 
-        # no check_call
-        subprocess.call(["git",
-                         "push",
-                         "--all"])
+        p = subprocess.Popen(["git",
+                              "push",
+                              "--all"],
+                              stdin = subprocess.PIPE)
+
+        #p.communicate(args.username + '\n' + args.password + '\n')
 
 ################################################################################
 # @file
