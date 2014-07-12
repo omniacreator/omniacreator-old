@@ -34,17 +34,17 @@ if __name__ == "__main__":
     "GIT Commit Script")
 
     parser.add_argument("message", help = "GIT Message")
-    parser.add_argument("username", help = "GIT Username")
-    parser.add_argument("password", help = "GIT Password")
 
     args = parser.parse_args()
 
     # Deploy ##################################################################
 
     for folder in REPO:
-        os.chdir(os.path.join(__folder__, folder))
+        path = os.path.abspath(os.path.join(__folder__, folder))
 
-        print "\nIn %s..." % os.path.abspath(os.path.join(__folder__, folder))
+        os.chdir(path)
+
+        print "########## Entering %s" % path
         sys.stdout.flush()
 
         # no check_call
@@ -58,12 +58,13 @@ if __name__ == "__main__":
                          "-m",
                          args.message])
 
-        p = subprocess.Popen(["git",
-                              "push",
-                              "--all"],
-                              stdin = subprocess.PIPE)
+        # no check_call
+        subprocess.call(["git",
+                         "push",
+                         "--all"])
 
-        p.communicate(args.username + '\r\n' + args.password + '\r\n')
+        print "########################################"
+        sys.stdout.flush()
 
 ################################################################################
 # @file
