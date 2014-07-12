@@ -44,8 +44,8 @@ if __name__ == "__main__":
 
         os.chdir(path)
 
-        print "\n########################################"
-        print "Entering %s" % path
+        print "\n########################################\n"
+        print "\nEntering %s\n" % path
         sys.stdout.flush()
 
         # no check_call
