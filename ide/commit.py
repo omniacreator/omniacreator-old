@@ -58,10 +58,7 @@ if __name__ == "__main__":
         # no check_call
         subprocess.call(["git",
                          "push",
-                         "--all",
-                         #"origin",
-                         args.username,
-                         args.password])
+                         "--all"])
 
 ################################################################################
 # @file
