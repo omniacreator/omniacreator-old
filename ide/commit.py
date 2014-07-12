@@ -44,7 +44,8 @@ if __name__ == "__main__":
 
         os.chdir(path)
 
-        print "########## Entering %s" % path
+        print "\n########################################"
+        print "Entering %s" % path
         sys.stdout.flush()
 
         # no check_call
@@ -62,9 +63,6 @@ if __name__ == "__main__":
         subprocess.call(["git",
                          "push",
                          "--all"])
-
-        print "########################################"
-        sys.stdout.flush()
 
 ################################################################################
 # @file
