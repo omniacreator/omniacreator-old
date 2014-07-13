@@ -15,7 +15,7 @@ Windows Guide
 * Install [Git 1.9.4 for Windows](http://git-scm.com/download/win/) *(or better)*
   1. Please select **Use Git from the Windows Command Prompt** when prompted
   2. Please select **Checkout as-is, commit Unix-style line endings** when prompted
-* Install [Windows Credential Store 1.2.0 for GIT](http://gitcredentialstore.codeplex.com/) *(or better)*
+* Install [Windows Credential Store 1.2.0 for Git](http://gitcredentialstore.codeplex.com/) *(or better)*
 * Install [Qt 5.3.1 Online Installer for Windows](http://qt-project.org/downloads/) *(or better)*
   1. Please deselect **Qt** when prompted
   2. Please select **Qt -> Qt 5.3 -> MinGW 4.8.2 (32 bit)** when prompted
@@ -24,28 +24,30 @@ Windows Guide
   5. Please select **Qt -> Qt Cloud Services** when prompted
 * Install [CMake 3.0.0 for Windows](http://www.cmake.org/cmake/resources/software.html) *(or better)*
   1. Please select **Add CMake to the system PATH for all users** when prompted
-* Install [InstallBuilder 9.0.2 Multiplatform (Professional) for Windows](http://installbuilder.bitrock.com/download-installbuilder-for-qt-step-2.html) *(or better)*
-  1. Manually add **${installbuilder-installdir}\bin** to your path
-  2. Manually add **${installbuilder-installdir}\autoupdate\bin** to your path
+* Install [BitRock InstallBuilder 9.0.2 Multiplatform (Professional) for Windows](http://installbuilder.bitrock.com/download-installbuilder-for-qt-step-2.html) *(or better)*
+  1. Add **${installbuilder-installdir}\bin** to your path
+  2. Add **${installbuilder-installdir}\autoupdate\bin** to your path
 * Install [ActivePython 2.7.8 for Windows (x86)](http://www.activestate.com/activepython/downloads/) *(or better)*
   1. Please select **ActivePython -> Entire feature will be installed on local hard drive** when prompted
 * Install [ActivePerl 5.16.3 for Windows (x86)](http://www.activestate.com/activeperl/downloads/) *(or better)*
   1. Please select **ActivePython -> Entire feature will be installed on local hard drive** when prompted
 * Install [ActiveTcl 8.6.1 for Windows (x86)](http://www.activestate.com/activetcl/downloads/) *(or better)*
 * Install [Doxygen 1.8.7 for Windows](http://www.stack.nl/~dimitri/doxygen/download.html) *(or better)*
-  1. Manually add **${doxygen-installdir}\bin** to your path
+  1. Add **${doxygen-installdir}\bin** to your path
 * Install [Graphviz 2.38.0 for Windows](http://www.graphviz.org/Download_windows.php) *(or better)*
-  1. Manually add **${graphviz-installdir}\bin** to your path
+  1. Add **${graphviz-installdir}\bin** to your path
 * ***(TRUSTED DEVELOPERS)*** Install [kSign 2.0.0 for Windows](http://codesigning.ksoftware.net) *(or better)*
-  1. Manually add **${ksign-installdir}** to your path
+  1. Add **${ksign-installdir}** to your path
 * ***(TRUSTED DEVELOPERS)*** Install [WinSCP 5.5.4 for Windows](http://winscp.net/eng/download.php#download2) *(or better)*
-  1. Manually add **${winscp-installdir}** to your path
+  1. Add **${winscp-installdir}** to your path
 
 *Please replace ${xxx} variables with the appropriate path*
 
 ### Configure
 
-1. Clone **[Omnia Creator](github-windows://openRepo/https://github.com/omniacreator/omniacreator/)** with GitHub for Windows
+1. Clone **https://github.com/omniacreator/omniacreator.git** with Git
+  1. `cd ${clonedir}`
+  2. `git clone --recursive https://github.com/omniacreator/omniacreator.git`
 2. Open **${clonedir}\\ide\qt-creator-src\qtcreator.pro** with QtCreator
   1. Set the debug build directory to **${clonedir}\\ide\qt-creator-build** (click **details** to show)
   2. Set the release build directory to **${clonedir}\\ide\qt-creator-build** (click **details** to show)
