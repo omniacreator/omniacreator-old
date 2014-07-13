@@ -83,9 +83,7 @@ if __name__ == "__main__":
 
             # no check_call
             if subprocess.call(' '.join(command)):
-
-                print "Uploading Failed!"
-                sys.stdout.flush()
+                sys.exit("Uploading Failed!")
 
     # elif sys.platform == "darwin": # mac
     # else: # linux

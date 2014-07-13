@@ -75,9 +75,7 @@ if __name__ == "__main__":
 
             # no check_call
             if subprocess.call(command):
-
-                print "Signing Failed!"
-                sys.stdout.flush()
+                sys.exit("Signing Failed!")
 
     # elif sys.platform == "darwin": # mac
     # else: # linux
