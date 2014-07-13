@@ -74,13 +74,15 @@ if __name__ == "__main__":
 
         command.append("\"exit\"")
 
-        if subprocess.check_call(' '.join(command)):
+        # no check_call
+        if subprocess.call(' '.join(command)):
 
             print "Trying again..."
             print "Uploading %s..." % os.path.basename(file_to_upload)
             sys.stdout.flush()
 
-            if subprocess.check_call(' '.join(command)):
+            # no check_call
+            if subprocess.call(' '.join(command)):
 
                 print "Uploading Failed!"
                 sys.stdout.flush()

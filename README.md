@@ -16,6 +16,7 @@ Windows Guide
   * Please select **Use Git from the Windows Command Prompt** when prompted
   * Please select **Checkout as-is, commit Unix-style line endings** when prompted
 * Install [GitHub for Windows 2.0.6](https://windows.github.com) *(or better)*
+* Install [Windows Credential Store for GIT 1.2.0](http://gitcredentialstore.codeplex.com) *(or better)*
 * Install [Qt 5.3.0 for Windows 32-bit (MinGW 4.8.2, OpenGL)](http://qt-project.org/downloads) *(or better)*
 * Install [CMake 3.0.0 for Windows](http://www.cmake.org/cmake/resources/software.html) *(or better)*
   * Add **${cmake-installdir}\bin** to your path

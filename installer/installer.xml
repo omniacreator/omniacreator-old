@@ -1066,7 +1066,7 @@
     <productComments>${pro_description}</productComments>
     <productContact>${pro_email}</productContact>
     <productDisplayIcon>${installdir}\ide\qtcreator\bin\${pro_short_name}.exe</productDisplayIcon>
-    <productUrlHelpLink>${pro_url_wo_slash}/help/</productUrlHelpLink>
+    <productUrlHelpLink>${pro_url_wo_slash}/help/general/</productUrlHelpLink>
     <productUrlInfoAbout>${pro_url}</productUrlInfoAbout>
     <release>${pro_version}</release>
     <replaceLockedFilesOnReboot>1</replaceLockedFilesOnReboot>
@@ -1076,7 +1076,7 @@
     <singleInstanceCheck>1</singleInstanceCheck>
     <splashScreenDelay>5</splashScreenDelay>
     <summary>${pro_description}</summary>
-    <vendor>${pro_vendor}</vendor>
+    <vendor>Omnia Creator</vendor>
     <windowsExecutableIcon>../icons/internal/installer/installer/installer.ico</windowsExecutableIcon>
     <windowsResourceComments>${pro_description}</windowsResourceComments>
     <windowsResourceFileDescription>${pro_full_name}</windowsResourceFileDescription>
@@ -1120,7 +1120,7 @@
         </runProgram>
         <runProgram>
             <abortOnError>0</abortOnError>
-            <program>${installdir}\tools\ftdi\${cdm_exe}.exe</program>
+            <program>${cdm_exe}</program>
             <programArguments></programArguments>
             <progressText>Install FTDI drivers</progressText>
             <showMessageOnError>0</showMessageOnError>

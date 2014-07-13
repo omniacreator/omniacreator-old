@@ -66,13 +66,15 @@ if __name__ == "__main__":
         command.extend(["/p", args.pfx_password])
         command.append(file_to_sign)
 
-        if subprocess.check_call(command):
+        # no check_call
+        if subprocess.call(command):
 
             print "Trying again..."
             print "Signing %s..." % os.path.basename(file_to_sign)
             sys.stdout.flush()
 
-            if subprocess.check_call(command):
+            # no check_call
+            if subprocess.call(command):
 
                 print "Signing Failed!"
                 sys.stdout.flush()
