@@ -7,11 +7,11 @@
             <platform>windows</platform>
         </platformFile>
         <platformFile>
-            <filename>omniacreator-0.1-linux-installer.exe</filename>
+            <filename>omniacreator-0.1-linux-installer.run</filename>
             <platform>linux</platform>
         </platformFile>
         <platformFile>
-            <filename>omniacreator-0.1-osx-installer.exe</filename>
+            <filename>omniacreator-0.1-osx-installer.dmg</filename>
             <platform>osx</platform>
         </platformFile>
     </platformFileList>

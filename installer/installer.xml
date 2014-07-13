@@ -1082,7 +1082,7 @@
     <windowsResourceFileDescription>${pro_full_name}</windowsResourceFileDescription>
     <windowsResourceFileVersion>${pro_version}</windowsResourceFileVersion>
     <windowsResourceInternalName>${pro_short_name}</windowsResourceInternalName>
-    <windowsResourceLegalCopyright>Copyright ${pro_copyright}</windowsResourceLegalCopyright>
+    <windowsResourceLegalCopyright>Copyright (c) ${pro_copyright}</windowsResourceLegalCopyright>
     <windowsResourceOriginalFilename>${pro_short_name}-${pro_version}-${platform_name}-installer.exe</windowsResourceOriginalFilename>
     <windowsUninstallerExecutableIcon>../icons/internal/installer/uninstaller/uninstaller.ico</windowsUninstallerExecutableIcon>
     <finalPageActionList>
@@ -1249,8 +1249,8 @@
             <title>Copyright</title>
             <description>Copyright</description>
             <explanation>Copyright</explanation>
-            <value>(c) 2014 Kwabena W. Agyeman</value>
-            <default>(c) 2014 Kwabena W. Agyeman</default>
+            <value>2014 Kwabena W. Agyeman</value>
+            <default>2014 Kwabena W. Agyeman</default>
             <allowEmptyValue>0</allowEmptyValue>
             <ask>0</ask>
             <cliOptionShow>0</cliOptionShow>
