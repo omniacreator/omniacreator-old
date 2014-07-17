@@ -3,3 +3,7 @@
 	url = https://github.com/omniacreator/qtcreator.git
 	branch = omniacreator
 	fetchRecurseSubmodules = true
+[submodule "ninja"]
+	path = ninja
+	url = https://github.com/martine/ninja.git
+	branch = release

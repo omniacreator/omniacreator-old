@@ -218,6 +218,41 @@ if __name__ == "__main__":
 
     else:
 
+        # Ninja Build Begin ###################################################
+
+        ninja_bin = ""
+
+        if sys.platform.startswith("win"): # windows
+
+            ninja_bin = os.path.join(__folder__, "../ninja/ninja.exe")
+
+            if not os.path.exists(ninja_bin):
+                subprocess.check_call(["python", os.path.join(__folder__,
+                "../ninja/bootstrap.py"), "--platform", "mingw"])
+
+        elif sys.platform == "darwin": # mac
+
+            ninja_bin = os.path.join(__folder__, "../ninja/ninja")
+
+            if not os.path.exists(ninja_bin):
+                subprocess.check_call(["python", os.path.join(__folder__,
+                "../ninja/bootstrap.py"), "--platform", "darwin"])
+
+        else: # linux
+
+            ninja_bin = os.path.join(__folder__, "../ninja/ninja")
+
+            if not os.path.exists(ninja_bin):
+                subprocess.check_call(["python", os.path.join(__folder__,
+                "../ninja/bootstrap.py"), "--platform", "linux"])
+
+        # Ninja Build End #####################################################
+
+        print "Deploying Ninja to build dir..."
+        sys.stdout.flush()
+
+        shutil.copy2(ninja_bin, os.path.join(build_folder, "bin"))
+
         print "Deploying CMake Files to build dir..."
         sys.stdout.flush()
 
@@ -248,6 +283,11 @@ if __name__ == "__main__":
             "qt-creator-src/src/plugins/"
             "omniacreator/deploy-interfacelibrary.py"),
             build_folder])
+
+            print "Deploying Ninja to install dir..."
+            sys.stdout.flush()
+
+            shutil.copy2(ninja_bin, os.path.join(install_folder, "bin"))
 
             print "Deploying CMake Files to install dir..."
             sys.stdout.flush()
@@ -294,15 +334,15 @@ if __name__ == "__main__":
             os.path.join(build_folder, "Makefile"),
             "deployqt", "INSTALL_ROOT=\""+install_folder+'\"'])
 
-            print "Executing Make Deploy Artifacts..."
-            sys.stdout.flush()
+            # print "Executing Make Deploy Artifacts..."
+            # sys.stdout.flush()
 
-            subprocess.check_call([args.make_path, "-f",
-            os.path.join(build_folder, "Makefile"),
-            "deployartifacts", "INSTALL_ROOT=\""+install_folder+'\"'])
+            # subprocess.check_call([args.make_path, "-f",
+            # os.path.join(build_folder, "Makefile"),
+            # "deployartifacts", "INSTALL_ROOT=\""+install_folder+'\"'])
 
-            print "Executing Make Cleanup..."
-            sys.stdout.flush()
+            # print "Executing Make Cleanup..."
+            # sys.stdout.flush()
 
             # PHONY COMMAND subprocess.check_call([args.make_path, "-f",
             # PHONY COMMAND os.path.join(build_folder, "Makefile"),
@@ -324,35 +364,35 @@ if __name__ == "__main__":
             shutil.rmtree(os.path.join(install_folder,
             "bin/qml"), True)
 
-            shutil.rmtree(os.path.join(install_folder,
-            "lib/qtcreatorcdbext64"), True)
+            # shutil.rmtree(os.path.join(install_folder,
+            # "lib/qtcreatorcdbext64"), True)
 
-            shutil.rmtree(os.path.join(install_folder,
-            "lib/vcredist_msvc2010"), True)
+            # shutil.rmtree(os.path.join(install_folder,
+            # "lib/vcredist_msvc2010"), True)
 
-            try:
-                os.remove(os.path.join(install_folder,
-                "bin/win64interrupt.exe"))
-            except OSError:
-                pass
+            # try:
+            #     os.remove(os.path.join(install_folder,
+            #     "bin/win64interrupt.exe"))
+            # except OSError:
+            #     pass
 
-            try:
-                os.remove(os.path.join(install_folder,
-                "bin/changelog.jom.txt"))
-            except OSError:
-                pass
+            # try:
+            #     os.remove(os.path.join(install_folder,
+            #     "bin/changelog.jom.txt"))
+            # except OSError:
+            #     pass
 
-            try:
-                os.remove(os.path.join(install_folder,
-                "bin/ibjom.cmd"))
-            except OSError:
-                pass
+            # try:
+            #     os.remove(os.path.join(install_folder,
+            #     "bin/ibjom.cmd"))
+            # except OSError:
+            #     pass
 
-            try:
-                os.remove(os.path.join(install_folder,
-                "bin/profile.xml"))
-            except OSError:
-                pass
+            # try:
+            #     os.remove(os.path.join(install_folder,
+            #     "bin/profile.xml"))
+            # except OSError:
+            #     pass
 
             try:
                 os.remove(os.path.join(install_folder,
