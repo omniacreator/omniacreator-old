@@ -251,6 +251,9 @@ if __name__ == "__main__":
         print "Deploying Ninja to build dir..."
         sys.stdout.flush()
 
+        if not os.path.exists(os.path.join(build_folder, "bin")):
+            os.makedirs(os.path.join(build_folder, "bin"))
+
         shutil.copy2(ninja_bin, os.path.join(build_folder, "bin"))
 
         print "Deploying CMake Files to build dir..."
@@ -286,6 +289,9 @@ if __name__ == "__main__":
 
             print "Deploying Ninja to install dir..."
             sys.stdout.flush()
+
+            if not os.path.exists(os.path.join(install_folder, "bin")):
+                os.makedirs(os.path.join(install_folder, "bin"))
 
             shutil.copy2(ninja_bin, os.path.join(install_folder, "bin"))
 

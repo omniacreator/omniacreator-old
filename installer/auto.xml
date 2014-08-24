@@ -6,6 +6,8 @@
     <logoImage>../icons/internal/icon/installer-icon48x48.png</logoImage>
     <splashImage>../icons/internal/about/installer-about524x262.png</splashImage>
     <wmImage>../icons/internal/icon/icon48x48.png</wmImage>
+    <requireInstallationByRootUser>0</requireInstallationByRootUser>
+    <requestedExecutionLevel>asInvoker</requestedExecutionLevel>
     <singleInstanceCheck>1</singleInstanceCheck>
     <splashScreenDelay>5</splashScreenDelay>
     <vendor>Omnia Creator</vendor>
