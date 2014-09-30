@@ -15,6 +15,9 @@
 
 #define BUZZER_PIN 10
 
+#define BUTTON_0 9
+#define BUTTON_1 8
+
 ILCore core;
 
 ILOscilloscope oscope;
@@ -47,8 +50,10 @@ ILInterfaceSlider buzzerTone0;
 ILInterfaceSlider buzzerTone1;
 ILInterfaceSlider buzzerTone2;
 ILInterfaceSlider buzzerTone3;
+ILInterfaceSeperator seperator0;
 ILInterfaceRadioButton buzzerRB0;
 ILInterfaceRadioButton buzzerRB1;
+ILInterfaceSeperator seperator1;
 
 ILOscilloscope OCDemo;
 ILOscilloscopeCurve XYPlot1;
@@ -95,14 +100,21 @@ void setup()
     ///////////////////////////////////////////////////////////////////////////
 
     oscope.initDocked(&core, "Analog In");
-
     oscope.setBackgroundColor(0xFF444444);
+
     oscope.setYAxisRangeAutoScale(false);
     oscope.setYAxisRangeLower(0);
     oscope.setYAxisRangeUpper(5);
 
-    oscope.setXAxisLabel("Time");
-    oscope.setYAxisLabel("Voltage");
+    oscope.setFFTYAxisRangeAutoScale(false);
+    oscope.setFFTYAxisRangeLower(0);
+    oscope.setFFTYAxisRangeUpper(1);
+
+    oscope.setXAxisLabel("\u0394 Time (s)");
+    oscope.setYAxisLabel("Voltage (v)");
+
+    oscope.setFFTXAxisLabel("Frequency (hz)");
+    oscope.setFFTYAxisLabel("Voltage (v)");
 
     analogIn0.init(&oscope, "Potentiometer");
     analogIn1.init(&oscope, "Photo Resistor");
@@ -118,12 +130,12 @@ void setup()
     analogIn4.setDeltaMode(true);
     analogIn5.setDeltaMode(true);
 
-    analogIn0.setSampleRate(66);
-    analogIn1.setSampleRate(66);
-    analogIn2.setSampleRate(66);
-    analogIn3.setSampleRate(66);
-    analogIn4.setSampleRate(66);
-    analogIn5.setSampleRate(66);
+    analogIn0.setSampleRate(50);
+    analogIn1.setSampleRate(50);
+    analogIn2.setSampleRate(50);
+    analogIn3.setSampleRate(50);
+    analogIn4.setSampleRate(50);
+    analogIn5.setSampleRate(50);
 
     analogIn0.setScaler(1023/5);
     analogIn1.setScaler(1023/5);
@@ -145,7 +157,7 @@ void setup()
     greenSlider.setMaximum(255);
     blueSlider.setMaximum(255);
 
-    LEDBUI.initDocked(&core, "LED & Buzzer Control");
+    LEDBUI.initDocked(&core, "LED and Buzzer Control");
     LEDBUIGroupBox.init(&LEDBUI, "LED Control");
 
     led0.init(&LEDBUIGroupBox, "LED 0");
@@ -179,8 +191,10 @@ void setup()
     buzzerTone2.setMaximum(1000);
     buzzerTone3.setMaximum(10000);
 
+    seperator0.init(&buzzerGroupBox);
     buzzerRB0.init(&buzzerGroupBox, "Buzzer Off");
     buzzerRB1.init(&buzzerGroupBox, "Buzzer On");
+    seperator1.init(&buzzerGroupBox);
 
     buzzerRB0.setChecked(true);
     buzzerRB1.setChecked(false);
@@ -196,8 +210,40 @@ void setup()
     XYPlot2.setSize(4096);
 }
 
+bool button0State = false;
+bool button0State2 = false;
+bool button1State = false;
+bool button1State2 = false;
+
 void loop()
 {
+    if(digitalRead(BUTTON_0) != button0State)
+    {
+        button0State = !button0State;
+
+        if(button0State)
+        {
+            button0State2 = !button0State2;
+        }
+
+        analogIn0.setFFT(button0State2 ? GFFT_MAGNITUDE : GFFT_NONE);
+        analogIn1.setFFT(button0State2 ? GFFT_MAGNITUDE : GFFT_NONE);
+        analogIn2.setFFT(button0State2 ? GFFT_MAGNITUDE : GFFT_NONE);
+        analogIn3.setFFT(button0State2 ? GFFT_MAGNITUDE : GFFT_NONE);
+        analogIn4.setFFT(button0State2 ? GFFT_MAGNITUDE : GFFT_NONE);
+        analogIn5.setFFT(button0State2 ? GFFT_MAGNITUDE : GFFT_NONE);
+    }
+
+    if(digitalRead(BUTTON_1) != button1State)
+    {
+        button1State = !button1State;
+
+        if(button1State)
+        {
+            button1State2 = !button1State2;
+        }
+    }
+
     analogReadLoop();
     RGBLEDLoop();
     pinControlLoop();
@@ -206,12 +252,32 @@ void loop()
 
 void analogReadLoop()
 {
-    analogIn0.addValue(analogRead(0));
-    analogIn1.addValue(analogRead(1));
-    analogIn2.addValue(analogRead(2));
-    analogIn3.addValue(analogRead(3));
-    analogIn4.addValue(analogRead(4));
-    analogIn5.addValue(analogRead(5));
+    static unsigned int x0 = 0;
+    static unsigned int x1 = 0;
+    static unsigned int x2 = 0;
+
+    if(!button1State2)
+    {
+        analogIn0.addValue(analogRead(0));
+        analogIn1.addValue(analogRead(1));
+        analogIn2.addValue(analogRead(2));
+        analogIn3.addValue(analogRead(3));
+        analogIn4.addValue(analogRead(4));
+        analogIn5.addValue(analogRead(5));
+    }
+    else
+    {
+        float y0 = cos(radians(x0)); x0 += redSlider.getValue();
+        float y1 = cos(radians(x1)); x1 += greenSlider.getValue();
+        float y2 = cos(radians(x2)); x2 += blueSlider.getValue();
+
+        analogIn0.addValue(analogRead(0) * y0 * y1 * y2);
+        analogIn1.addValue(analogRead(1) * y0 * y1 * y2);
+        analogIn2.addValue(analogRead(2) * y0 * y1 * y2);
+        analogIn3.addValue(analogRead(3) * y0 * y1 * y2);
+        analogIn4.addValue(analogRead(4) * y0 * y1 * y2);
+        analogIn5.addValue(analogRead(5) * y0 * y1 * y2);
+    }
 }
 
 void RGBLEDLoop()
@@ -250,8 +316,11 @@ void demoLoop()
     static enum
     {
         BUTTERFLY,
+        LISSAJOUS,
         EPICYCLOID,
-        FERMATS
+        FERMATS,
+        NCURVE,
+        CIRCLE
     }
     e = BUTTERFLY;
 
@@ -260,6 +329,16 @@ void demoLoop()
         case BUTTERFLY:
         {
             if(runButterflyLoop())
+            {
+                e = LISSAJOUS;
+            }
+
+            break;
+        }
+
+        case LISSAJOUS:
+        {
+            if(runLissajousLoop())
             {
                 e = EPICYCLOID;
             }
@@ -280,6 +359,26 @@ void demoLoop()
         case FERMATS:
         {
             if(runFermatsSprialLoop())
+            {
+                e = NCURVE;
+            }
+
+            break;
+        }
+
+        case NCURVE:
+        {
+            if(runNCurveLoop())
+            {
+                e = CIRCLE;
+            }
+
+            break;
+        }
+
+        case CIRCLE:
+        {
+            if(runParametricCircleLoop())
             {
                 e = BUTTERFLY;
             }
@@ -311,16 +410,12 @@ bool runButterflyLoop()
             XYPlot1.setName("Butterfly");
             XYPlot2.setName("");
 
-            XYPlot1.setLineColor(0xFFFF00FF);
+            XYPlot1.setLineColor(0xFF7F007F);
             XYPlot1.setLineStyle(LS_SOLID_LINE);
-            XYPlot1.setFillColor(0x7FFFC8FF);
+            XYPlot1.setFillColor(0x7F7F007F);
             XYPlot1.setFillStyle(FS_SOLID_PATTERN);
 
-            i = 0;
-
-            e = LOOP;
-
-            return false;
+            i = 0; e = LOOP; return false;
         }
 
         case LOOP:
@@ -331,9 +426,62 @@ bool runButterflyLoop()
             cos(radians(i))*(exp(cos(radians(i)))-
             (2*cos(radians(4*i)))-pow(sin(radians(i/12.0)),5)));
 
-            i += 1; if(i == 4096) { i = 0; e = PAUSE; }
+            i += 1; if(i == 4096) { i = 0; e = PAUSE; } return false;
+        }
 
-            return false;
+        case PAUSE:
+        {
+            i += 1; if(i == 64) { i = 0; e = INIT; return true; } return false;
+        }
+    }
+}
+
+bool runLissajousLoop()
+{
+    static unsigned int i = 0;
+
+    static enum
+    {
+        INIT,
+        LOOP,
+        PAUSE
+    }
+    e = INIT;
+
+    switch(e)
+    {
+        case INIT:
+        {
+            XYPlot1.removeData();
+            XYPlot2.removeData();
+
+            XYPlot1.setName("Lissajous Curve 1");
+            XYPlot2.setName("Lissajous Curve 2");
+
+            XYPlot1.setLineColor(0xFFFF7F00);
+            XYPlot1.setLineStyle(LS_SOLID_LINE);
+            XYPlot1.setFillColor(0x7FFF7FC8);
+            XYPlot1.setFillStyle(FS_SOLID_PATTERN);
+
+            XYPlot2.setLineColor(0xFFFFFF00);
+            XYPlot2.setLineStyle(LS_SOLID_LINE);
+            XYPlot2.setFillColor(0x7FFFFFC8);
+            XYPlot2.setFillStyle(FS_SOLID_PATTERN);
+
+            i = 0; e = LOOP; return false;
+        }
+
+        case LOOP:
+        {
+            XYPlot1.addKeyValueF(
+            sin(radians(5*i)),
+            sin(radians(6*i)));
+
+            XYPlot2.addKeyValueF(
+            sin(radians(6*i)),
+            sin(radians(5*i)));
+
+            i += 1; if(i == 512) { i = 0; e = PAUSE; } return false;
         }
 
         case PAUSE:
@@ -368,9 +516,9 @@ bool runEpicycloidLoop()
             XYPlot1.setName("Epicycloid");
             XYPlot2.setName("");
 
-            XYPlot1.setLineColor(0xFF00FFFF);
+            XYPlot1.setLineColor(0xFF007F7F);
             XYPlot1.setLineStyle(LS_SOLID_LINE);
-            XYPlot1.setFillColor(0x7FC8FFFF);
+            XYPlot1.setFillColor(0x7F007F7F);
             XYPlot1.setFillStyle(FS_SOLID_PATTERN);
 
             i = 0; e = LOOP; return false;
@@ -432,14 +580,117 @@ bool runFermatsSprialLoop()
         case LOOP:
         {
             XYPlot1.addKeyValueF(
-            sqrt(i)*cos(radians(i))*abs(5),
-            sqrt(i)*sin(radians(i))*abs(5));
+            sqrt(i)*cos(radians(i))*abs(1),
+            sqrt(i)*sin(radians(i))*abs(1));
 
             XYPlot2.addKeyValueF(
-            -sqrt(i)*cos(radians(i))*abs(5),
-            -sqrt(i)*sin(radians(i))*abs(5));
+            -sqrt(i)*cos(radians(i))*abs(1),
+            -sqrt(i)*sin(radians(i))*abs(1));
 
             i += 1; if(i == 4096) { i = 0; e = PAUSE; } return false;
+        }
+
+        case PAUSE:
+        {
+            i += 1; if(i == 64) { i = 0; e = INIT; return true; } return false;
+        }
+    }
+}
+
+bool runNCurveLoop()
+{
+    static unsigned int i = 0;
+
+    static enum
+    {
+        INIT,
+        LOOP,
+        PAUSE
+    }
+    e = INIT;
+
+    switch(e)
+    {
+        case INIT:
+        {
+            XYPlot1.removeData();
+            XYPlot2.removeData();
+
+            XYPlot1.setName("N-Curve");
+            XYPlot2.setName("");
+
+            XYPlot1.setLineColor(0xFF007F00);
+            XYPlot1.setLineStyle(LS_SOLID_LINE);
+            XYPlot1.setFillColor(0x7F007F00);
+            XYPlot1.setFillStyle(FS_SOLID_PATTERN);
+
+            i = 0; e = LOOP; return false;
+        }
+
+        case LOOP:
+        {
+            XYPlot1.addKeyValueF(
+            (2*PI)*((i/4096.0) - 1 + (cos(76*PI*(i/4096.0))*
+                                      cos(38*PI*(i/4096.0)))),
+            cos(2*PI*(i/4096.0)) + ((2*PI)*cos(76*PI*(i/4096.0))*
+                                           sin(38*PI*(i/4096.0))));
+
+            i += 1; if(i == 4096) { i = 0; e = PAUSE; } return false;
+        }
+
+        case PAUSE:
+        {
+            i += 1; if(i == 64) { i = 0; e = INIT; return true; } return false;
+        }
+    }
+}
+
+bool runParametricCircleLoop()
+{
+    static unsigned int i = 0;
+
+    static enum
+    {
+        INIT,
+        LOOP,
+        PAUSE
+    }
+    e = INIT;
+
+    switch(e)
+    {
+        case INIT:
+        {
+            XYPlot1.removeData();
+            XYPlot2.removeData();
+
+            XYPlot1.setName("Left Circle");
+            XYPlot2.setName("Right Circle");
+
+            XYPlot1.setLineColor(0xFFFFA500);
+            XYPlot1.setLineStyle(LS_SOLID_LINE);
+            XYPlot1.setFillColor(0x00000000);
+            XYPlot1.setFillStyle(FS_NO_BRUSH);
+
+            XYPlot2.setLineColor(0xFFFFA500);
+            XYPlot2.setLineStyle(LS_SOLID_LINE);
+            XYPlot2.setFillColor(0x00000000);
+            XYPlot2.setFillStyle(FS_NO_BRUSH);
+
+            i = 0; e = LOOP; return false;
+        }
+
+        case LOOP:
+        {
+            XYPlot1.addKeyValueF(
+            (3 * sin(i) * cos(i)) - 1.5,
+            (3 * cos(i) * cos(i)));
+
+            XYPlot2.addKeyValueF(
+            (3 * sin(i) * cos(i)) + 1.5,
+            (3 * cos(i) * cos(i)));
+
+            i += 1; if(i == 512) { i = 0; e = PAUSE; } return false;
         }
 
         case PAUSE:
