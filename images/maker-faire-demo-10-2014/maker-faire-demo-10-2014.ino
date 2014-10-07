@@ -1,3 +1,13 @@
+/**
+* @file maker-faire-demo-10-2014.ino
+* Atlanta Maker Faire Demo
+*
+* @version @n 1.0
+* @date @n Mon Oct 2014
+*
+* @author @n Kwabena W. Agyeman
+*/
+
 #include <InterfaceLibrary.h>
 
 #define RED_PWM 11
