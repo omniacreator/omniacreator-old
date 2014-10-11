@@ -3,7 +3,7 @@
 * Atlanta Maker Faire Demo
 *
 * @version @n 1.0
-* @date @n Mon Oct 2014
+* @date @n Oct 2014
 *
 * @author @n Kwabena W. Agyeman
 */

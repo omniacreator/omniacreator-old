@@ -1,7 +1,7 @@
 Release History
 ===============
 
-### Version 0.2 - 2014
+### Version 0.2 - 2014 (not released)
 
 1. Updated Arduino SDK to version 1.0.6
 2. Updated CMake Build System to version 3.02
