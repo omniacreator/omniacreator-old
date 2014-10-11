@@ -24,7 +24,7 @@ Windows Guide
   5. Please select **Qt -> Qt Cloud Services** when prompted
 * Install [CMake 3.0.0 for Windows](http://www.cmake.org/cmake/resources/software.html) *(or better)*
   1. Please select **Add CMake to the system PATH for all users** when prompted
-* Install [BitRock InstallBuilder 9.0.2 Multiplatform (Professional) for Windows](http://installbuilder.bitrock.com/download-installbuilder-for-qt-step-2.html) *(or better)*
+* Install [BitRock InstallBuilder 9.5.0 Multiplatform (Professional) for Windows](http://installbuilder.bitrock.com/download-installbuilder-for-qt-step-2.html) *(or better)*
   1. Add **${installbuilder-installdir}\bin** to your path
   2. Add **${installbuilder-installdir}\autoupdate\bin** to your path
 * Install [ActivePython 2.7.8 for Windows (x86)](http://www.activestate.com/activepython/downloads/) *(or better)*
@@ -32,7 +32,7 @@ Windows Guide
 * Install [ActivePerl 5.16.3 for Windows (x86)](http://www.activestate.com/activeperl/downloads/) *(or better)*
   1. Please select **ActivePython -> Entire feature will be installed on local hard drive** when prompted
 * Install [ActiveTcl 8.6.1 for Windows (x86)](http://www.activestate.com/activetcl/downloads/) *(or better)*
-* Install [Doxygen 1.8.7 for Windows](http://www.stack.nl/~dimitri/doxygen/download.html) *(or better)*
+* Install [Doxygen 1.8.8 for Windows](http://www.stack.nl/~dimitri/doxygen/download.html) *(or better)*
   1. Add **${doxygen-installdir}\bin** to your path
 * Install [Graphviz 2.38.0 for Windows](http://www.graphviz.org/Download_windows.php) *(or better)*
   1. Add **${graphviz-installdir}\bin** to your path
