@@ -13,6 +13,7 @@ Release History
   * Added open project file based project support
 6. Improved CMake Scripts
 7. Improved File Menu
+  * Fixed Close Project Bug
   * Added Close Project & All Files
   * Added Examples Menu
 8. Improved Serial Tree
