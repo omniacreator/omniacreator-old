@@ -19,6 +19,8 @@ Release History
   * Added Examples Menu
 8. Improved Serial Terminal
 9. Improved Serial Tree
+10. Added show all widget menu button
+11. Added hide all widget menu button
 
 ### Version 0.1 - 2014
 
