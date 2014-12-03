@@ -1,6 +1,12 @@
 Release History
 ===============
 
+### Version 0.2.1 - 2014
+
+1. Improved CMake Build System
+2. Improved Propeller CMake Scripts
+  * Added binary, eeprom, and elf support
+
 ### Version 0.2 - 2014
 
 1. Updated Arduino SDK to version 1.0.6
