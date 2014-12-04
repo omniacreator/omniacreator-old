@@ -6,6 +6,8 @@ Release History
 1. Improved CMake Build System
 2. Improved Propeller CMake Scripts
   * Added binary, eeprom, and elf support
+3. Added SPIN error parser
+4. Added Loader error parser
 
 ### Version 0.2 - 2014
 
