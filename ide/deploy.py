@@ -518,7 +518,7 @@ if __name__ == "__main__":
 
             if args.build_installer:
 
-                print "Building Installer..."
+                print "Building Installers..."
                 sys.stdout.flush()
 
                 subprocess.check_call(" ".join(["builder-cli",
@@ -543,6 +543,32 @@ if __name__ == "__main__":
                 "pro_url_wo_slash="+'\"'+pro_url_wo_slash+'\"',
                 "pro_email="+'\"'+pro_email+'\"',
                 "--downloadable-components"]))
+                subprocess.check_call(" ".join(["builder-cli",
+                "build", '\"' + installer_project + '\"',
+                "--verbose",
+                "--license", '\"' + installer_license + '\"',
+                "--setvars",
+                "project.shortName="+'\"'+pro_short_name+'\"',
+                "project.fullName="+'\"'+pro_full_name+'\"',
+                "project.version="+'\"'+pro_version+'\"',
+                "project.vendor="+'\"'+pro_vendor+'\"',
+                "pro_full_name="+'\"'+pro_full_name+'\"',
+                "pro_full_name_wo_spaces="+'\"'+pro_full_name_wo_spaces+'\"',
+                "pro_short_name="+'\"'+pro_short_name+'\"',
+                "pro_version="+'\"'+pro_version+'\"',
+                "pro_vendor="+'\"'+pro_vendor+'\"',
+                "pro_copyright="+'\"'+pro_copyright+'\"',
+                "pro_category="+'\"'+pro_category+'\"',
+                "pro_description="+'\"'+pro_description+'\"',
+                "pro_domain_name="+'\"'+pro_domain_name+'\"',
+                "pro_url="+'\"'+pro_url+'\"',
+                "pro_url_wo_slash="+'\"'+pro_url_wo_slash+'\"',
+                "pro_email="+'\"'+pro_email+'\"',
+                "project.installerFilename="
+                +'\"'+
+                "${product_shortname}-${product_version}-${platform_name}-"
+                "offline-installer.${platform_exec_suffix}"
+                +'\"']))
 
                 if args.sign:
 
@@ -588,7 +614,7 @@ if __name__ == "__main__":
                     SFTP_USERNAME, args.upload, pro_domain_name,
                     "wp-download/installer", updater_information])
 
-                    print "Uploading Installer..."
+                    print "Uploading Installers..."
                     sys.stdout.flush()
 
                     binaries = []
