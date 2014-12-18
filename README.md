@@ -135,3 +135,17 @@ Mac Guide
 ---------
 
 Omnia Creator has not been ported to Mac yet.
+
+### Install
+
+* Install [Git 2.0.1 for Mac](http://git-scm.com/download/mac/) *(or better)*
+* Install [Qt 5.4.0 Online Installer for Mac](http://qt-project.org/downloads/) *(or better)*
+  1. Please deselect **Qt** when prompted
+  2. Please select **Qt -> Qt 5.4 -> clang 64-bit** when prompted
+  3. Please select **Qt -> Qt 5.4 -> Source Components** when prompted
+  4. Please select **Qt -> Qt 5.4 -> Qt WebEngine** when prompted
+  5. Please select **Qt -> Tools** when prompted
+  6. Please select **Qt -> Qt Cloud Services** when prompted
+  7. Please select **Qt -> Qt Extras** when prompted
+
+### Configure

@@ -10,6 +10,10 @@ Release History
 4. Added Loader error parser
 5. Added SPIN Interface Library
 6. Added offline download installer
+7. Improved Serial Interface Library user experience
+    * Docked widgets now auto show
+    * Init now replaces widgets in addition to renaming widgets
+8. Fixed Examples Menu Bug
 
 ### Version 0.2 - 2014
 
