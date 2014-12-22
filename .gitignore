@@ -9,3 +9,6 @@
 *.backup
 
 Thumbs.db
+.DS_Store
+._*
+
