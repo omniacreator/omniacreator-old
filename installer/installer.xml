@@ -1061,7 +1061,10 @@
     <enableTimestamp>0</enableTimestamp>
     <ignoreInvalidOptions>1</ignoreInvalidOptions>
     <nativePackageName>${pro_full_name}</nativePackageName>
+    <osxApplicationBundleIcon>../icons/internal/installer/installer/installer.icns</osxApplicationBundleIcon>
     <osxApplicationBundleIdentifier>com.${pro_short_name}.installer</osxApplicationBundleIdentifier>
+    <osxSigningIdentity>Developer ID Installer: Kwabena Agyeman</osxSigningIdentity>
+    <osxUninstallerApplicationBundleIcon>../icons/internal/installer/uninstaller/uninstaller.icns</osxUninstallerApplicationBundleIcon>
     <outputDirectory>installer</outputDirectory>
     <productComments>${pro_description}</productComments>
     <productContact>${pro_email}</productContact>
@@ -1083,6 +1086,7 @@
     <windowsResourceFileVersion>${pro_version}</windowsResourceFileVersion>
     <windowsResourceInternalName>${pro_short_name}</windowsResourceInternalName>
     <windowsResourceLegalCopyright>Copyright (c) ${pro_copyright}</windowsResourceLegalCopyright>
+    <windowsResourceLegalTrademarks>${pro_full_name}</windowsResourceLegalTrademarks>
     <windowsResourceOriginalFilename>${pro_short_name}-${pro_version}-${platform_name}-installer.exe</windowsResourceOriginalFilename>
     <windowsUninstallerExecutableIcon>../icons/internal/installer/uninstaller/uninstaller.ico</windowsUninstallerExecutableIcon>
     <finalPageActionList>

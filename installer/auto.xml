@@ -6,7 +6,8 @@
     <logoImage>../icons/internal/icon/installer-icon48x48.png</logoImage>
     <splashImage>../icons/internal/about/installer-about524x262.png</splashImage>
     <wmImage>../icons/internal/icon/icon48x48.png</wmImage>
-    <requireInstallationByRootUser>0</requireInstallationByRootUser>
+    <osxApplicationBundleIcon>../icons/internal/icon/icon.icns</osxApplicationBundleIcon>
+    <osxApplicationBundleIdentifier>com.omniacreator.installer</osxApplicationBundleIdentifier>
     <requestedExecutionLevel>asInvoker</requestedExecutionLevel>
     <singleInstanceCheck>1</singleInstanceCheck>
     <splashScreenDelay>5</splashScreenDelay>
@@ -17,5 +18,6 @@
     <windowsResourceFileVersion>1.0</windowsResourceFileVersion>
     <windowsResourceInternalName>omniacreator</windowsResourceInternalName>
     <windowsResourceLegalCopyright>Copyright (c) Kwabena W. Agyeman 2014</windowsResourceLegalCopyright>
+    <windowsResourceLegalTrademarks>Omnia Creator</windowsResourceLegalTrademarks>
     <windowsResourceOriginalFilename>omniacreator-1.0-windows-updater.exe</windowsResourceOriginalFilename>
 </autoUpdateProject>

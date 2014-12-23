@@ -149,3 +149,7 @@ Omnia Creator has not been ported to Mac yet.
   7. Please select **Qt -> Qt Extras** when prompted
 
 ### Configure
+
+1. Clone **https://github.com/omniacreator/omniacreator.git** with Git
+  1. `cd ${clonedir}`
+  2. `git clone --recursive https://github.com/omniacreator/omniacreator.git`
