@@ -11,6 +11,100 @@
     <wmImage>../icons/internal/icon/icon48x48.png</wmImage>
     <defaultLanguage>auto</defaultLanguage>
     <allowLanguageSelection>1</allowLanguageSelection>
+    <functionDefinitionList>
+        <actionDefinition>
+            <name>associateLinuxFileExtension</name>
+            <actionList>
+                <foreach>
+                    <variables>extension</variables>
+                    <values>${extensions}</values>
+                    <actionList>
+                        <writeFile>
+                           <path>${installdir}/ide/qtcreator/icons/${pro_short_name}-x-${extension}.xml</path>
+                           <text><![CDATA[<?xml version="1.0"?><mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'><mime-type type="application/${pro_short_name}-x-${extension}"><comment>${friendlyName}</comment><glob pattern="*.${extension}"/></mime-type></mime-info>]]></text>
+                        </writeFile>
+                        <runProgram>
+                            <program>xdg-mime</program>
+                            <programArguments>install ${installdir}/ide/qtcreator/icons/${pro_short_name}-x-${extension}.xml</programArguments>
+                        </runProgram>
+                        <writeFile>
+                            <path>/usr/share/applications/${pro_short_name}-x-${extension}.desktop</path>
+                            <encoding>utf-8</encoding>
+                            <text>[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=${pro_full_name}
+GenericName=${pro_full_name}
+Comment=${friendlyName}
+Exec=${installdir}/ide/qtcreator/bin/${pro_short_name}.sh -client
+Terminal=false
+Type=Application
+Categories=Application;Utility;TextEditor;
+MimeType=application/${pro_short_name}-x-${extension}</text>
+                        </writeFile>
+                        <runProgram>
+                            <program>xdg-mime</program>
+                            <programArguments>default /usr/share/applications/${pro_short_name}-x-${extension}.desktop application/${pro_short_name}-x-${extension}</programArguments>
+                        </runProgram>
+                    </actionList>
+                </foreach>
+            </actionList>
+            <parameterList>
+                <stringParameter name="extensions" value="" default=""/>
+                <stringParameter name="friendlyName" value="" default=""/>
+                <stringParameter name="icon" value="" default=""/>
+                <stringParameter name="mimeType" value="" default=""/>
+                <stringParameter name="progID" value="" default=""/>
+            </parameterList>
+        </actionDefinition>
+        <actionDefinition>
+            <name>removeLinuxFileAssociation</name>
+            <actionList>
+                <foreach>
+                    <variables>extension</variables>
+                    <values>${extensions}</values>
+                    <actionList>
+                        <runProgram>
+                           <program>xdg-mime</program>
+                           <programArguments>uninstall ${installdir}/ide/qtcreator/icons/${pro_short_name}-x-${extension}.xml</programArguments>
+                        </runProgram>
+                        <deleteFile path="/usr/share/applications/${pro_short_name}-x-${extension}.desktop"/>
+                    </actionList>
+                </foreach>
+            </actionList>
+            <parameterList>
+                <stringParameter name="extensions" value="" default=""/>
+                <stringParameter name="mimeType" value="" default=""/>
+                <stringParameter name="progID" value="" default=""/>
+            </parameterList>
+        </actionDefinition>
+        <actionDefinition>
+            <name>associateMacFileExtension</name>
+            <actionList>
+                <foreach>
+                    <variables>extension</variables>
+                    <values>${extensions}</values>
+                    <actionList>
+                        <runProgram>
+                            <program>defaults</program>
+                            <programArguments>write com.apple.LaunchServices LSHandlers -array-add <![CDATA["<dict><key>LSHandlerContentTag</key><string>${extension}</string><key>LSHandlerContentTagClass</key><string>public.filename-extension</string><key>LSHandlerRoleAll</key><string>com.${progID}</string></dict>"]]></programArguments>
+                        </runProgram>
+                        <runProgram>
+                            <program>/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister</program>
+                            <programArguments>-kill -domain local -domain system -domain user</programArguments>
+                        </runProgram>
+                    </actionList>
+                </foreach>
+            </actionList>
+            <parameterList>
+                <stringParameter name="extensions" value="" default=""/>
+                <stringParameter name="friendlyName" value="" default=""/>
+                <stringParameter name="icon" value="" default=""/>
+                <stringParameter name="mimeType" value="" default=""/>
+                <stringParameter name="progID" value="" default=""/>
+            </parameterList>
+        </actionDefinition>
+    </functionDefinitionList>
     <componentList>
         <component>
             <name>main_component</name>
@@ -49,6 +143,8 @@
                     <distributionFileList>
                         <distributionDirectory>
                             <allowWildcards>1</allowWildcards>
+                            <excludeFiles>*/cmake-board-modules/*;*/cmake-board-types/*</excludeFiles>
+                            <filterEvaluationLogic>or</filterEvaluationLogic>
                             <origin>install/*</origin>
                         </distributionDirectory>
                     </distributionFileList>
@@ -460,6 +556,42 @@
                             </distributionFileList>
                         </folder>
                         <folder>
+                            <description>Arduino CMake Board Modules 0</description>
+                            <destination>${installdir}/ide/qtcreator/share/qtcreator/cmake-board-modules/arduino-cmake</destination>
+                            <name>arduino_cmake_board_modules_0</name>
+                            <platforms>all</platforms>
+                            <distributionFileList>
+                                <distributionDirectory>
+                                    <allowWildcards>1</allowWildcards>
+                                    <origin>install/share/qtcreator/cmake-board-modules/arduino-cmake/*</origin>
+                                </distributionDirectory>
+                            </distributionFileList>
+                        </folder>
+                        <folder>
+                            <description>Arduino CMake Board Modules 1</description>
+                            <destination>${installdir}/ide/qtcreator/share/qtcreator/cmake-board-modules</destination>
+                            <name>arduino_cmake_board_modules_1</name>
+                            <platforms>all</platforms>
+                            <distributionFileList>
+                                <distributionDirectory>
+                                    <allowWildcards>1</allowWildcards>
+                                    <origin>install/share/qtcreator/cmake-board-modules/arduino-cmake.cmake</origin>
+                                </distributionDirectory>
+                            </distributionFileList>
+                        </folder>
+                        <folder>
+                            <description>Arduino CMake Board Types</description>
+                            <destination>${installdir}/ide/qtcreator/share/qtcreator/cmake-board-types/Arduino</destination>
+                            <name>arduino_cmake_board_types</name>
+                            <platforms>all</platforms>
+                            <distributionFileList>
+                                <distributionDirectory>
+                                    <allowWildcards>1</allowWildcards>
+                                    <origin>install/share/qtcreator/cmake-board-types/Arduino/*</origin>
+                                </distributionDirectory>
+                            </distributionFileList>
+                        </folder>
+                        <folder>
                             <description>Arduino Icons Folder Windows</description>
                             <destination>${installdir}/ide/qtcreator/icons</destination>
                             <name>arduino_icons_folder_all</name>
@@ -577,6 +709,42 @@
                                 <distributionDirectory>
                                     <allowWildcards>1</allowWildcards>
                                     <origin>../tools/propeller/*</origin>
+                                </distributionDirectory>
+                            </distributionFileList>
+                        </folder>
+                        <folder>
+                            <description>Propeller CMake Board Modules 0</description>
+                            <destination>${installdir}/ide/qtcreator/share/qtcreator/cmake-board-modules/propeller-cmake</destination>
+                            <name>propeller_cmake_board_modules_0</name>
+                            <platforms>all</platforms>
+                            <distributionFileList>
+                                <distributionDirectory>
+                                    <allowWildcards>1</allowWildcards>
+                                    <origin>install/share/qtcreator/cmake-board-modules/propeller-cmake/*</origin>
+                                </distributionDirectory>
+                            </distributionFileList>
+                        </folder>
+                        <folder>
+                            <description>Propeller CMake Board Modules 1</description>
+                            <destination>${installdir}/ide/qtcreator/share/qtcreator/cmake-board-modules</destination>
+                            <name>propeller_cmake_board_modules_1</name>
+                            <platforms>all</platforms>
+                            <distributionFileList>
+                                <distributionDirectory>
+                                    <allowWildcards>1</allowWildcards>
+                                    <origin>install/share/qtcreator/cmake-board-modules/propeller-cmake.cmake</origin>
+                                </distributionDirectory>
+                            </distributionFileList>
+                        </folder>
+                        <folder>
+                            <description>Propeller CMake Board Types</description>
+                            <destination>${installdir}/ide/qtcreator/share/qtcreator/cmake-board-types/Parallax</destination>
+                            <name>propeller_cmake_board_types</name>
+                            <platforms>all</platforms>
+                            <distributionFileList>
+                                <distributionDirectory>
+                                    <allowWildcards>1</allowWildcards>
+                                    <origin>install/share/qtcreator/cmake-board-types/Parallax/*</origin>
                                 </distributionDirectory>
                             </distributionFileList>
                         </folder>

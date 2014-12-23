@@ -14,6 +14,7 @@ Release History
     * Docked widgets now auto show
     * Init now replaces widgets in addition to renaming widgets
 8. Fixed Examples Menu Bug
+9. Updated Ninja to version 1.5.3
 
 ### Version 0.2 - 2014
 
