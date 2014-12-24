@@ -221,30 +221,44 @@ if __name__ == "__main__":
         # Ninja Build Begin ###################################################
 
         ninja_bin = ""
+        ninja_configure = ["python",
+        os.path.join(__folder__, "../ninja/configure.py")]
 
         if sys.platform.startswith("win"): # windows
 
             ninja_bin = os.path.join(__folder__, "../ninja/ninja.exe")
-
+            ninja_configure.extend(["--platform=mingw", "--host=mingw"])
             if not os.path.exists(ninja_bin):
-                subprocess.check_call(["python", os.path.join(__folder__,
-                "../ninja/bootstrap.py"), "--platform", "mingw"])
+                ninja_configure.append("--bootstrap")
+
+            cwd = os.getcwd()
+            os.chdir(os.path.dirname(ninja_bin))
+            subprocess.check_call(ninja_configure)
+            os.chdir(cwd)
 
         elif sys.platform == "darwin": # mac
 
             ninja_bin = os.path.join(__folder__, "../ninja/ninja")
-
+            ninja_configure.extend(["--platform=darwin", "--host=darwin"])
             if not os.path.exists(ninja_bin):
-                subprocess.check_call(["python", os.path.join(__folder__,
-                "../ninja/bootstrap.py"), "--platform", "darwin"])
+                ninja_configure.append("--bootstrap")
+
+            cwd = os.getcwd()
+            os.chdir(os.path.dirname(ninja_bin))
+            subprocess.check_call(ninja_configure)
+            os.chdir(cwd)
 
         else: # linux
 
             ninja_bin = os.path.join(__folder__, "../ninja/ninja")
-
+            ninja_configure.extend(["--platform=linux", "--host=linux"])
             if not os.path.exists(ninja_bin):
-                subprocess.check_call(["python", os.path.join(__folder__,
-                "../ninja/bootstrap.py"), "--platform", "linux"])
+                ninja_configure.append("--bootstrap")
+
+            cwd = os.getcwd()
+            os.chdir(os.path.dirname(ninja_bin))
+            subprocess.check_call(ninja_configure)
+            os.chdir(cwd)
 
         # Ninja Build End #####################################################
 
@@ -474,6 +488,7 @@ if __name__ == "__main__":
                             file.write("check_for_updates = 1\n")
                             file.write("update_download_location = %s\n\n" %
                             ("${system_temp_directory}"))
+
                             file.write("[Proxy]\n\n")
                             file.write("enable = 1\n")
 
@@ -543,6 +558,7 @@ if __name__ == "__main__":
                 "pro_url_wo_slash="+'\"'+pro_url_wo_slash+'\"',
                 "pro_email="+'\"'+pro_email+'\"',
                 "--downloadable-components"]))
+
                 subprocess.check_call(" ".join(["builder-cli",
                 "build", '\"' + installer_project + '\"',
                 "--verbose",

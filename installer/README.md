@@ -1,7 +1,7 @@
 Release History
 ===============
 
-### Version 0.3 - 2014
+### Version 0.3 - 12/2014
 
 1. Improved CMake Build System
 2. Improved Propeller CMake Scripts
@@ -9,17 +9,22 @@ Release History
 3. Added SPIN error parser
 4. Added Loader error parser
 5. Added SPIN Interface Library
-6. Added offline download installer
+6. Added Offline Download Installer
 7. Improved Serial Interface Library user experience
     * Docked widgets now auto show
     * Init now replaces widgets in addition to renaming widgets
 8. Fixed Examples Menu Bug
-9. Updated Ninja to version 1.5.3
+9. Fixed GUI Hiccup Issue
+10. Updated Ninja to version 1.5.3
+11. Updated CMake Build System to version 3.1.0
+12. Updated Propeller SDK to version 1.0 RC1
+  * Updated Learn Folder to version 2014.11.07
+13. Updated QCustomPlot to version 1.3.0 beta
 
-### Version 0.2 - 2014
+### Version 0.2 - 11/2014
 
 1. Updated Arduino SDK to version 1.0.6
-2. Updated CMake Build System to version 3.02
+2. Updated CMake Build System to version 3.0.2
 3. Updated FTDI Drivers to version 2.12.00
 4. Updated Propeller SDK to version 0.9.64
   * Updated Learn Folder to version 2014.8.27
@@ -37,6 +42,6 @@ Release History
 10. Added show all widget menu button
 11. Added hide all widget menu button
 
-### Version 0.1 - 2014
+### Version 0.1 - 10/2014
 
 1. Initial Release
