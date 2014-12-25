@@ -14,6 +14,7 @@ Release History
     * Docked widgets now auto show
     * Init now replaces widgets in addition to renaming widgets
 8. Fixed Examples Menu Bug
+    * Added Documents Menu
 9. Fixed GUI Hiccup Issue
 10. Updated Ninja to version 1.5.3
 11. Updated CMake Build System to version 3.1.0
