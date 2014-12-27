@@ -1,17 +1,17 @@
 <installerInformation>
-    <versionId>20000</versionId>
-    <version>0.2</version>
+    <versionId>30000</versionId>
+    <version>0.3</version>
     <platformFileList>
         <platformFile>
-            <filename>omniacreator-0.2-windows-installer.exe</filename>
+            <filename>omniacreator-0.3-windows-installer.exe</filename>
             <platform>windows</platform>
         </platformFile>
         <platformFile>
-            <filename>omniacreator-0.2-linux-installer.run</filename>
+            <filename>omniacreator-0.3-linux-installer.run</filename>
             <platform>linux</platform>
         </platformFile>
         <platformFile>
-            <filename>omniacreator-0.2-osx-installer.dmg</filename>
+            <filename>omniacreator-0.3-osx-installer.dmg</filename>
             <platform>osx</platform>
         </platformFile>
     </platformFileList>
