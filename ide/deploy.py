@@ -482,10 +482,10 @@ if __name__ == "__main__":
                                 multiplier /= 100
 
                             file.write("[Update]\n\n")
-                            file.write("url = %s\n" %
+                            file.write("url = %s\n\n" %
                             (pro_url + "wp-download/installer/update.xml"))
-                            file.write("version_id = %d\n" % version)
-                            file.write("check_for_updates = 1\n")
+                            file.write("version_id = %d\n\n" % version)
+                            file.write("check_for_updates = 1\n\n")
                             file.write("update_download_location = %s\n\n" %
                             ("${system_temp_directory}"))
 
